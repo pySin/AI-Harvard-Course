@@ -101,8 +101,6 @@ def shortest_path(source, target):
 
     If no possible path, returns None.
     """
-    print(f"Source: {source}")
-    print(f"Target: {target}")
 
     neighbours = neighbors_for_person(source)
     action = {n[1] for n in neighbours if n[1] != source}
@@ -112,59 +110,34 @@ def shortest_path(source, target):
         return target_data
 
     frontier = QueueFrontier()
-    frontier.add(first_node)  # OK: 158, "first_node_parent", {'102', '705', '641', '200', '398'}
-    #stars_checked = list(action)
-    #stars_checked.append(source)
+    frontier.add(first_node)
     stars_checked = {source}
 
     while True:
         states = []
-        source_reached = False
         if frontier.empty():
             return None
         node = frontier.remove()
-        # print(f"Current Node State: {node.state}")
         for artist_id in node.action:
             if artist_id in stars_checked:
                 continue
             neighbours = neighbors_for_person(artist_id)
-            # print(f"Artist ID: {artist_id}")
-            # print(f"Stars Checked: {stars_checked}")
-            # print(f"Neighbours: {neighbours}")
             linking_movie = {mp[0] for mp in neighbours if mp[1] == node.state[-1]}.pop()
             stars_checked.add(artist_id)
             action = {s[1] for s in neighbours if s[1] not in stars_checked}
-            # print(f"Current Action: {action}")
             if not action:
-                # print(f"Not Action!")
                 continue
-            # print(f"New Stars: {action}") # Demi Moore
-            # action = {s[1] for s in neighbours} # Ursula Andress
             new_node = Node((linking_movie, artist_id), node, action)
             frontier.add(new_node)
             if target in new_node.action:
-                # print(f"Target {people[target]['name']} Found in: {new_node.state}")
                 final_movie = [movie for movie in movies if target
                                in movies[movie]["stars"] and artist_id in movies[movie]["stars"]][0]
-                # print(f"Final Movie: {final_movie}")
                 while True:
-                    # print(f"New node data: {new_node.state}, {new_node.parent}, {new_node.action}")
-                    # states.append(new_node.state)
                     states.insert(0, new_node.state)
                     new_node = new_node.parent
-                    # print(f"New Node State: {new_node.state}")
                     if new_node.parent == "first_node_parent":
-                        print(f"Source Reached: {new_node.state}")
                         states.append((final_movie, target))
-                        print(f"Stars Checked: {stars_checked}")
-                        print(f"Length Stars Checked: {len(stars_checked)}")
                         return states  # Fix improper record shift
-                        # return [('101523', '5460'), ('80025', '1831'), ('66212', '266')]
-
-        # print(f"Stars Checked: {stars_checked}")
-        # [print(f.state, f.parent.state, f.action) for f in frontier.frontier]
-
-    # return None
 
 
 def person_id_for_name(name):
