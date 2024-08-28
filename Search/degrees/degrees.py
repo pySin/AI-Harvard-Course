@@ -117,13 +117,11 @@ def shortest_path(source, target):
     #stars_checked.append(source)
     stars_checked = {source}
 
-    degrees = 0
     while True:
         states = []
         source_reached = False
         if frontier.empty():
             return None
-        # degrees += 1
         node = frontier.remove()
         # print(f"Current Node State: {node.state}")
         for artist_id in node.action:
@@ -132,7 +130,7 @@ def shortest_path(source, target):
             neighbours = neighbors_for_person(artist_id)
             # print(f"Artist ID: {artist_id}")
             # print(f"Stars Checked: {stars_checked}")
-            print(f"Neighbours: {neighbours}")
+            # print(f"Neighbours: {neighbours}")
             linking_movie = {mp[0] for mp in neighbours if mp[1] == node.state[-1]}.pop()
             stars_checked.add(artist_id)
             action = {s[1] for s in neighbours if s[1] not in stars_checked}
@@ -165,10 +163,8 @@ def shortest_path(source, target):
 
         # print(f"Stars Checked: {stars_checked}")
         # [print(f.state, f.parent.state, f.action) for f in frontier.frontier]
-        if degrees == 20:
-            break
 
-    return None
+    # return None
 
 
 def person_id_for_name(name):
