@@ -71,5 +71,11 @@ def winner(board):
             return p
         elif all([board[2][0] == p, board[1][1] == p, board[0][2] == p]):
             return p
-
     return None
+
+
+def terminal(board):
+    """
+    Returns True if game is over, False otherwise.
+    """
+    raise NotImplementedError
