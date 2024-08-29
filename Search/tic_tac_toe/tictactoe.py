@@ -46,3 +46,10 @@ def result(board, action):
     current_player = player(board_deep_copy)
     board_deep_copy[action[0]][action[1]] = current_player
     return board_deep_copy
+
+
+def winner(board):
+    """
+    Returns the winner of the game, if there is one.
+    """
+    raise NotImplementedError
