@@ -24,3 +24,9 @@ def player(board):
 
     return O if x_moves > o_moves else X
 
+
+def actions(board):
+    """
+    Returns set of all possible actions (i, j) available on the board.
+    """
+    raise NotImplementedError
