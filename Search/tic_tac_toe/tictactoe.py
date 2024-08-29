@@ -43,5 +43,6 @@ def result(board, action):
     if action not in actions(board):
         raise Exception("This move is not available!")
     board_deep_copy = copy.deepcopy(board)
-
-    raise NotImplementedError
+    current_player = player(board_deep_copy)
+    board_deep_copy[action[0]][action[1]] = current_player
+    return board_deep_copy
