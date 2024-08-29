@@ -48,8 +48,8 @@
 
 import tictactoe
 
-current_state = [[tictactoe.EMPTY, "O", "X"],
-                 [tictactoe.EMPTY, "X", tictactoe.EMPTY],
-                 ["X", "O", "X"]]
+current_state = [["O", tictactoe.EMPTY, "X"],
+                 [tictactoe.EMPTY, "O", tictactoe.EMPTY],
+                 ["X", "O", "O"]]
 
 print(tictactoe.winner(current_state))
