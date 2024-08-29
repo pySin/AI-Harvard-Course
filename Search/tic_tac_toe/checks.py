@@ -29,6 +29,15 @@
 # print(tictactoe.result(current_state, (0, 2)))
 
 # -- Check Horizontal win
+# import tictactoe
+#
+# current_state = [[tictactoe.EMPTY, "X", tictactoe.EMPTY],
+#                  [tictactoe.EMPTY, tictactoe.EMPTY, tictactoe.EMPTY],
+#                  ["X", "X", "X"]]
+#
+# print(tictactoe.winner(current_state))
+
+# -- Check Vertical win
 import tictactoe
 
 current_state = [[tictactoe.EMPTY, "X", tictactoe.EMPTY],
