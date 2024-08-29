@@ -33,3 +33,12 @@ def actions(board):
     [[available_actions.add((r, c)) for c in range(len(board[0])) if board[r][c] == EMPTY]
      for r in range(len(board))]
     return available_actions
+
+
+def result(board, action):
+    """
+    Returns the board that results from making move (i, j) on the board.
+    """
+    if action not in actions(board):
+        raise Exception("This move is not available!")
+    raise NotImplementedError
