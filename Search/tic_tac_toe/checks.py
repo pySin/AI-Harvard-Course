@@ -40,8 +40,8 @@
 # -- Check Vertical win
 import tictactoe
 
-current_state = [[tictactoe.EMPTY, "X", tictactoe.EMPTY],
-                 [tictactoe.EMPTY, tictactoe.EMPTY, tictactoe.EMPTY],
-                 ["X", "X", "X"]]
+current_state = [[tictactoe.EMPTY, "O", "X"],
+                 [tictactoe.EMPTY, "O", tictactoe.EMPTY],
+                 ["X", "O", "X"]]
 
 print(tictactoe.winner(current_state))
