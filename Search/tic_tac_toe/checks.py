@@ -28,7 +28,7 @@
 # current_state = tictactoe.result(current_state, (0, 0))
 # print(tictactoe.result(current_state, (0, 2)))
 
-# --
+# -- Check Horizontal win
 import tictactoe
 
 current_state = [[tictactoe.EMPTY, "X", tictactoe.EMPTY],
