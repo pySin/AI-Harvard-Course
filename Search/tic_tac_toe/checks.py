@@ -58,8 +58,12 @@
 
 import tictactoe
 
-current_state = [["O", tictactoe.EMPTY, "X"],
-                 [tictactoe.EMPTY, tictactoe.EMPTY, tictactoe.EMPTY],
-                 ["X", "O", "O"]]
+# current_state = [["O", tictactoe.EMPTY, "X"],
+#                  [tictactoe.EMPTY, tictactoe.EMPTY, tictactoe.EMPTY],
+#                  ["X", "O", "O"]]
+
+current_state = [["X", "O", "X"],
+                 ["O", "O", "X"],
+                 ["X", "X", "O"]]
 
 print(tictactoe.terminal(current_state))
