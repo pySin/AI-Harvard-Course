@@ -1,4 +1,5 @@
 # Tic Tac Toe logic
+import copy
 import math
 
 X = "X"
@@ -41,4 +42,6 @@ def result(board, action):
     """
     if action not in actions(board):
         raise Exception("This move is not available!")
+    board_deep_copy = copy.deepcopy(board)
+
     raise NotImplementedError
