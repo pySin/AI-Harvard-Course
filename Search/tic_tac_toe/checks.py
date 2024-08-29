@@ -46,10 +46,20 @@
 
 # print(tictactoe.winner(current_state))
 
+# import tictactoe
+#
+# current_state = [["O", tictactoe.EMPTY, "X"],
+#                  [tictactoe.EMPTY, "O", tictactoe.EMPTY],
+#                  ["X", "O", "O"]]
+#
+# print(tictactoe.winner(current_state))
+
+# -- Test terminal() function
+
 import tictactoe
 
 current_state = [["O", tictactoe.EMPTY, "X"],
-                 [tictactoe.EMPTY, "O", tictactoe.EMPTY],
+                 [tictactoe.EMPTY, tictactoe.EMPTY, tictactoe.EMPTY],
                  ["X", "O", "O"]]
 
-print(tictactoe.winner(current_state))
+print(tictactoe.terminal(current_state))
