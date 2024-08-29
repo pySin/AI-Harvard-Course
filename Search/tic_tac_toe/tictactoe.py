@@ -62,8 +62,12 @@ def winner(board):
     # Check for Column win
     for j in range(len(board[0])):
         if all([board[i][j] == "X" for i in range(len(board))]):
-            return "Vertical X"
+            return "X"
         if all([board[i][j] == "O" for i in range(len(board))]):
             return "O"
+
+    for p in [X, O]:
+        if all([board[0][0] == p, board[1][1] == p, board[2][2] == p]):
+            return p
 
     return None
