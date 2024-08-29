@@ -52,4 +52,7 @@ def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
+    for row in board:
+        if all(row, "X"):
+            print(1)
     raise NotImplementedError
