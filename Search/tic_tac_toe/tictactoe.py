@@ -69,5 +69,7 @@ def winner(board):
     for p in [X, O]:
         if all([board[0][0] == p, board[1][1] == p, board[2][2] == p]):
             return p
+        elif all([board[2][0] == p, board[1][1] == p, board[0][2] == p]):
+            return p
 
     return None
