@@ -52,9 +52,13 @@ def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
+    # Check for row win
     for row in board:
-        if all(row == "X"):
+        if all([c == "X" for c in row]):
             return "X"
-        if all(row == "O"):
+        if all([c == "O" for c in row]):
             return "O"
+
+
+
     return None
