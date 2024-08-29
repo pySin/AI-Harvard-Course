@@ -78,4 +78,5 @@ def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
+
     raise NotImplementedError
