@@ -69,10 +69,17 @@
 # print(tictactoe.terminal(current_state))
 
 
+# import tictactoe
+#
+# current_state = [["X", "O", tictactoe.EMPTY],
+#                  [tictactoe.EMPTY, "O", "X"],
+#                  ["X", "O", "X"]]
+#
+# print(tictactoe.utility(current_state))
+
+# --
 import tictactoe
 
 current_state = [["X", "O", tictactoe.EMPTY],
                  [tictactoe.EMPTY, "O", "X"],
                  ["X", "O", "X"]]
-
-print(tictactoe.utility(current_state))
