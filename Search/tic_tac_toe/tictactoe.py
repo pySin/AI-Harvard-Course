@@ -123,3 +123,8 @@ def minimax(board):
             v = max(v, max_value(result(mm_board, action)))
         return v
 
+    current_player = player(board)
+    if current_player == "X":
+        return max_value(board)
+    else:
+        return min_value(board)
