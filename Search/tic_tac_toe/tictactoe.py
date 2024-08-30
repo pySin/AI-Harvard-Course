@@ -102,3 +102,9 @@ def utility(board):
     else:
         return 0
 
+
+def minimax(board):
+    """
+    Returns the optimal action for the current player on the board.
+    """
+    raise NotImplementedError
