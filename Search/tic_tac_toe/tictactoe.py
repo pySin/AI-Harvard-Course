@@ -113,4 +113,11 @@ def minimax(board):
         v = -math.inf
         for action in actions(mm_board):
             v = max()
+
+    def min_value(mm_board):
+        if terminal(mm_board):
+            return utility(mm_board)
+        v = math.inf
+        for action in actions(mm_board):
+            v = max()
     raise NotImplementedError
