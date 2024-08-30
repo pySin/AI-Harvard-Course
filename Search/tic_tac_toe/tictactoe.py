@@ -41,6 +41,7 @@ def result(board, action):
     Returns the board that results from making move (i, j) on the board.
     """
     if action not in actions(board):
+        print(f"Non Available Move: {action}")
         raise Exception("This move is not available!")
     board_deep_copy = copy.deepcopy(board)
     current_player = player(board_deep_copy)
