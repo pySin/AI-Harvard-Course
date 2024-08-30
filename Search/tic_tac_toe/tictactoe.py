@@ -107,7 +107,10 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
-    def max_value(board):
-        if terminal(board):
-            pass
+    def max_value(mm_board):
+        if terminal(mm_board):
+            return utility(mm_board)
+        v = -math.inf
+        for action in actions(mm_board):
+            v = max()
     raise NotImplementedError
