@@ -124,6 +124,7 @@ def minimax(board):
         return v
 
     current_player = player(board)
+    print(current_player)
     if current_player == "X":
         return max_value(board)
     else:
