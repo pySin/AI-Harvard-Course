@@ -116,6 +116,7 @@ def minimax(board):
             print(action)
             v = max(v, min_value(result(mm_board, action)))
             print(f"In Max Value: {v}")
+
         return v
 
     def min_value(mm_board):
@@ -129,7 +130,7 @@ def minimax(board):
         return v
 
     current_player = player(board)
-    print(current_player)
+    print(f"Current Player: {current_player}")
     if current_player == "X":
         return max_value(board)
     else:
