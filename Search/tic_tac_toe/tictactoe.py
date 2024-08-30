@@ -132,6 +132,10 @@ def minimax(board):
     current_player = player(board)
     print(f"Current Player: {current_player}")
     if current_player == "X":
-        return max_value(board)
+        x_value = max_value(board)
+        print(f"X value: {x_value}")
+        return x_value
     else:
+        o_value = min_value(board)
+        print(f"O value: {o_value}")
         return min_value(board)
