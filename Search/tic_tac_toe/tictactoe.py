@@ -112,12 +112,14 @@ def minimax(board):
             return utility(mm_board)
         v = -math.inf
         for action in actions(mm_board):
-            v = max()
+            v = max(v, min_value(result(mm_board, action)))
+        return v
 
     def min_value(mm_board):
         if terminal(mm_board):
             return utility(mm_board)
         v = math.inf
         for action in actions(mm_board):
-            v = max()
-    raise NotImplementedError
+            v = max(v, max_value(result(mm_board, action)))
+        return v
+
