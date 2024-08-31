@@ -41,6 +41,7 @@ def result(board, action):
     Returns the board that results from making move (i, j) on the board.
     """
     if action not in actions(board):
+        # print(f"Current Board: {board}")
         print(f"Non Available Move: {action}")
         raise Exception("This move is not available!")
     board_deep_copy = copy.deepcopy(board)
@@ -117,20 +118,20 @@ def minimax(board):
         for action in actions(mm_board):
             print(action)
             v = max(v, min_value(result(mm_board, action)))
-            print(f"In Max Value: {v}")
+            print(f"Value in max function: {v}")
+            print(f"Max Value Last Action: {action}")
 
         return v
 
     def min_value(mm_board):
-        min_action = None
         if terminal(mm_board):
+            print(f"In terminal section!")
             return utility(mm_board)
         v = math.inf
-        current_available_actions = list(actions(board))
-        for i in range(len(current_available_actions)):
-            # print(action)
-            v = min(v, max_value(result(mm_board, current_available_actions[i])))
-            min_action = current_available_actions[i]
+        for action in actions(mm_board):
+            v = min(v, max_value(result(mm_board, action)))
+            print(f"Value in min function: {v}")
+            print(f"Min Value Last Action: {action}")
 
         return v
 
