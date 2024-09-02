@@ -78,10 +78,13 @@
 # print(tictactoe.utility(current_state))
 
 # --
-import tictactoe
 
-current_state = [["X", "O", tictactoe.EMPTY],
-                 [tictactoe.EMPTY, tictactoe.EMPTY, "O"],
-                 ["X", "O", "X"]]
+# import tictactoe
+#
+# current_state = [["X", "O", tictactoe.EMPTY],
+#                  [tictactoe.EMPTY, tictactoe.EMPTY, "O"],
+#                  ["X", "O", "X"]]
+#
+# print(tictactoe.minimax(current_state))
 
-print(tictactoe.minimax(current_state))
+
