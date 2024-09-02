@@ -130,12 +130,17 @@ def minimax(board):
             print(f"Min Value Terminal Section: {board}")
             return utility(mm_board)
         v = math.inf
+        action_results = []
+        print(f"Actions mm_board: {actions(mm_board)}")
         for action in actions(mm_board):
             v = min(v, max_value(result(mm_board, action)))
             print(f"Result function result: {result(mm_board, action)}:")
             print(f"Value in min function: {v}")
             print(f"Min Value Last Action: {action}")
+            action_results.append([v, action])
+            print(f"Action Results: {action_results}")
 
+        print(f"Final Action results: {action_results}")
         return v
 
     current_player = player(board)
