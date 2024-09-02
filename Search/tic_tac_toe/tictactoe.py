@@ -117,11 +117,11 @@ def minimax(board):
             return utility(mm_board)
         v = -math.inf
         for action in actions(mm_board):
-            print(action)
+            # print(action)
             v = max(v, min_value(result(mm_board, action)))
-            print(f"Result function result: {result(mm_board, action)}:")
-            print(f"Value in max function: {v}")
-            print(f"Max Value Last Action: {action}")
+            # print(f"Result function result: {result(mm_board, action)}:")
+            # print(f"Value in max function: {v}")
+            # print(f"Max Value Last Action: {action}")
 
         return v
 
@@ -131,14 +131,14 @@ def minimax(board):
             return utility(mm_board)
         v = math.inf
         action_results = []
-        print(f"Actions mm_board: {actions(mm_board)}")
+        # print(f"Actions mm_board: {actions(mm_board)}")
         for action in actions(mm_board):
             v = min(v, max_value(result(mm_board, action)))
-            print(f"Result function result: {result(mm_board, action)}:")
-            print(f"Value in min function: {v}")
-            print(f"Min Value Last Action: {action}")
+            # print(f"Result function result: {result(mm_board, action)}:")
+            # print(f"Value in min function: {v}")
+            # print(f"Min Value Last Action: {action}")
             action_results.append([v, action])
-            print(f"Action Results: {action_results}")
+            # print(f"Action Results: {action_results}")
 
         print(f"Final Action results: {action_results}")
         return v
