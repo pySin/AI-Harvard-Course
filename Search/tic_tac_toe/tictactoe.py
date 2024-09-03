@@ -135,10 +135,11 @@ def minimax(board):
         length = sum([len([c for c in r if c is None]) for r in board])
         print(f"Board Length: {length}")
 
-        if len(action_results) == len([c for c in board if c is None]):
+        if len(action_results) == length:
             max_result = max([a[0] for a in action_results])
             best_action = (next(ba for ba in action_results if ba[0] == max_result), None)
-            return best_action
+            print(f"Best Action: {best_action}")
+            return best_action[0][1]
 
         return v
 
@@ -167,7 +168,8 @@ def minimax(board):
         if len(action_results) == length:
             min_result = min([a[0] for a in action_results])
             best_action = (next(ba for ba in action_results if ba[0] == min_result), None)
-            return best_action
+            print(f"Best Action: {best_action}")
+            return best_action[0][1]
 
         return v
 
