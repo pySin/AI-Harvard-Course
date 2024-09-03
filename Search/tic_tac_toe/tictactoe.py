@@ -113,10 +113,11 @@ def minimax(board):
     def max_value(mm_board):
         # print("In max value")
         if terminal(mm_board):
-            print(f"Max Value Terminal Section: {board}")
+            print(f"Max Value Terminal Section: {mm_board}")
             return utility(mm_board)
         v = -math.inf
-        for action in actions(mm_board):
+        available_actions = actions(mm_board)
+        for action in available_actions:
             # print(action)
             v = max(v, min_value(result(mm_board, action)))
             # print(f"Result function result: {result(mm_board, action)}:")
@@ -132,7 +133,8 @@ def minimax(board):
         v = math.inf
         action_results = []
         # print(f"Actions mm_board: {actions(mm_board)}")
-        for action in actions(mm_board):
+        available_actions = actions(mm_board)
+        for action in available_actions:
             v = min(v, max_value(result(mm_board, action)))
             # print(f"Result function result: {result(mm_board, action)}:")
             # print(f"Value in min function: {v}")
@@ -147,9 +149,9 @@ def minimax(board):
     print(f"Current Player: {current_player}")
     if current_player == "X":
         x_value = max_value(board)
-        print(f"X value: {x_value}")
+        print(f"Last X value: {x_value}")  # The script does not reach here
         return x_value
     else:
         o_value = min_value(board)
-        print(f"O value: {o_value}")
+        print(f"Last O value: {o_value}")  # The script does not reach here
         return min_value(board)
