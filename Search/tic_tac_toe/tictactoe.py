@@ -110,12 +110,12 @@ def minimax(board):
     Returns the optimal action for the current player on the board.
     """
 
-    action_results = []
-
     def max_value(mm_board):
+        action_results = []
         # print("In max value")
         if terminal(mm_board):
             print(f"Max Value Terminal Section: {mm_board}")
+
             return utility(mm_board)
         v = -math.inf
         available_actions = actions(mm_board)
@@ -126,10 +126,18 @@ def minimax(board):
             # print(f"Value in max function: {v}")
             # print(f"Max Value Last Action: {action}")
             action_results.append([v, action])
+            print(f"Available Actions: {available_actions}")
+            print(f"Final Action results: {action_results}")
+
+        if len(action_results) == len([c for c in board if c is None]):
+            max_result = max([a[0] for a in action_results])
+            best_action = (next(ba for ba in action_results if ba[0] == max_result), None)
+            return best_action
 
         return v
 
     def min_value(mm_board):
+        action_results = []
         if terminal(mm_board):
             print(f"Min Value Terminal Section: {board}")
             return utility(mm_board)
@@ -143,23 +151,20 @@ def minimax(board):
             # print(f"Min Value Last Action: {action}")
             action_results.append([v, action])
             # print(f"Action Results: {action_results}")
+        if len(action_results) == len([c for c in board if c is None]):
+            min_result = min([a[0] for a in action_results])
+            best_action = (next(ba for ba in action_results if ba[0] == min_result), None)
+            return best_action
 
-        print(f"Final Action results: {action_results}")
         return v
 
     current_player = player(board)
     print(f"Current Player: {current_player}")
     if current_player == "X":
         x_value = max_value(board)
-        print(f"Available Actions: {action_results}")
         print(f"Last X value: {x_value}")  # The script does not reach here
-        max_result = max([m[0] for m in action_results])
-        current_move = (next(r[1] for r in action_results if r[0] == max_result), None)
-        return current_move  # return a move(tuple)
+        return x_value  # return a move(tuple)
     else:
         o_value = min_value(board)
-        print(f"Available Actions: {action_results}")
         print(f"Last O value: {o_value}")  # The script does not reach here
-        min_result = min([m[0] for m in action_results])
-        current_move = (next(r[1] for r in action_results if r[0] == min_result), None)
-        return current_move  # return a move(tuple)
+        return o_value  # return a move(tuple)
