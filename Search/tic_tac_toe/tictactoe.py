@@ -128,9 +128,12 @@ def minimax(board):
             action_results.append([v, action])
             # print(f"Available Actions: {available_actions}")
             # print(f"Final Action results: {action_results}")
-        print(f"Available Actions: {len(available_actions)}")
-        print(f"Action results: {len(action_results)}")
-        print(f"Original Board length: {len([c for c in board if c is None])}")
+        # print(f"Available Actions: {len(available_actions)}")
+        # print(f"Action results: {len(action_results)}")
+        # print(f"Original Board length: {len([c for c in board if c is None])}")
+        print(f"Board: {board}")
+        length = sum([len([c for c in r if c is None]) for r in board])
+        print(f"Board Length: {length}")
 
         if len(action_results) == len([c for c in board if c is None]):
             max_result = max([a[0] for a in action_results])
@@ -154,11 +157,14 @@ def minimax(board):
             # print(f"Min Value Last Action: {action}")
             action_results.append([v, action])
             # print(f"Action Results: {action_results}")
-        print(f"Available Actions: {len(available_actions)}")
-        print(f"Action results: {len(action_results)}")
-        print(f"Original Board length: {len([c for c in board if c is None])}")
+        # print(f"Available Actions: {len(available_actions)}")
+        # print(f"Action results: {len(action_results)}")
+        # print(f"Original Board length: {len([c for c in board if c is None])}")
+        print(f"Board: {board}")
+        length = sum([len([c for c in r if c is None]) for r in board])
+        print(f"Board Length: {length}")
 
-        if len(action_results) == len([c for c in board if c is None]):
+        if len(action_results) == length:
             min_result = min([a[0] for a in action_results])
             best_action = (next(ba for ba in action_results if ba[0] == min_result), None)
             return best_action
