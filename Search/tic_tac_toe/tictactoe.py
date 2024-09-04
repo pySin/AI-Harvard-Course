@@ -96,7 +96,8 @@ def terminal(board):
     if winner(board) is not None:
         return True
 
-    # Check if there are empty cells
+    # Check if there are empty cells by loping
+    # each cell
     for i in range(len(board)):
         for j in range(len(board[i])):
             if board[i][j] == EMPTY:
