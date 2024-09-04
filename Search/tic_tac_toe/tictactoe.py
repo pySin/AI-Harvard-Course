@@ -212,7 +212,6 @@ def minimax(board):
 
             # Get the first Max result. The rest of the loop is not needed.
             best_action = (next(ba for ba in action_results if ba[0] == min_result), None)
-            print(f"Best Action: {best_action}")
             return best_action[0][1]
 
         return v

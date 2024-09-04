@@ -104,3 +104,5 @@ def function2(n):
     return function1(n)
 
 
+number = 0
+print(function2(number))
