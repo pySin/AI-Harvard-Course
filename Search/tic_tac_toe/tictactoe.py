@@ -133,7 +133,7 @@ def minimax(board):
         :return: a tuple, move coordinates
         """
 
-        # Store actions(moves) with their evaluations(1, -1, 0).
+        # Store actions(moves) and their evaluations(1, -1, 0).
         action_results = []
         if terminal(mm_board):
 
@@ -161,6 +161,8 @@ def minimax(board):
         :param mm_board: Tic Tac Toe play board
         :return: a tuple, move coordinates
         """
+
+        # Store actions(moves) and their evaluations(1, -1, 0).
         action_results = []
         if terminal(mm_board):
             return utility(mm_board)
