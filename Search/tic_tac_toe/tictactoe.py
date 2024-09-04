@@ -18,6 +18,8 @@ def initial_state():
             [EMPTY, EMPTY, EMPTY]]
 
 
+# Determine which player's move it is
+# by the moves already made on the playing board.
 def player(board):
     """
     Returns player who has the next turn on a board.
@@ -25,6 +27,8 @@ def player(board):
     x_moves = sum([m.count("X") for m in board])
     o_moves = sum([m.count("O") for m in board])
 
+    # If X moves are more than the O moves it's O's turn
+    # otherwise it's X's turn.
     return O if x_moves > o_moves else X
 
 
