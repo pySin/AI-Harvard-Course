@@ -129,8 +129,8 @@ def minimax(board):
         """
         Through 2 function cross recursion look for a result
         of a finished game optimal for the X player.
-        :param mm_board:
-        :return:
+        :param mm_board: Tic Tac Toe play board
+        :return: a tuple, move coordinates
         """
         action_results = []
         if terminal(mm_board):
@@ -144,17 +144,21 @@ def minimax(board):
             action_results.append([v, action])
 
         length = sum([len([c for c in r if c is None]) for r in board])
-        print(f"Board Length: {length}")
 
         if len(action_results) == length:
             max_result = max([a[0] for a in action_results])
             best_action = (next(ba for ba in action_results if ba[0] == max_result), None)
-            print(f"Best Action: {best_action}")
             return best_action[0][1]
 
         return v
 
     def min_value(mm_board):
+        """
+        Through 2 function cross recursion look for a result
+        of a finished game optimal for the O player.
+        :param mm_board: Tic Tac Toe play board
+        :return: a tuple, move coordinates
+        """
         action_results = []
         if terminal(mm_board):
             print(f"Min Value Terminal Section: {board}")
