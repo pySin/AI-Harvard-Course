@@ -156,6 +156,7 @@ def minimax(board):
             v = max(v, min_value(result(mm_board, action)))
             action_results.append([v, action])
 
+        # Get the original board length to compare with the best move candidates.
         length = sum([len([c for c in r if c is None]) for r in board])
 
         if len(action_results) == length:
@@ -195,7 +196,10 @@ def minimax(board):
             # the current move and assign.
             v = min(v, max_value(result(mm_board, action)))
             action_results.append([v, action])
+
+        # Get the original board length to compare with the best move candidates.
         length = sum([len([c for c in r if c is None]) for r in board])
+
 
         if len(action_results) == length:
             min_result = min([a[0] for a in action_results])
