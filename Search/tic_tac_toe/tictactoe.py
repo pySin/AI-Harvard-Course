@@ -46,11 +46,14 @@ def actions(board):
 def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
+    Another cell is taken(played).
     """
     if action not in actions(board):
-        # print(f"Current Board: {board}")
         print(f"Non Available Move: {action}")
         raise Exception("This move is not available!")
+
+    # Make and modify a deep copy of the board, so it doesn't
+    # change the main board state for the AI move calculations.
     board_deep_copy = copy.deepcopy(board)
     current_player = player(board_deep_copy)
     board_deep_copy[action[0]][action[1]] = current_player
