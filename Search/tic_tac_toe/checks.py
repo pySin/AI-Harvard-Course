@@ -93,6 +93,14 @@ def function1(n):
     if n == 100:
         return f"Targe number reached: {n}"
 
+    n += 1
+    return function2(n)
 
+
+def function2(n):
+    if n == 100:
+        return f"Targe number reached: {n}"
+
+    return function1(n)
 
 
