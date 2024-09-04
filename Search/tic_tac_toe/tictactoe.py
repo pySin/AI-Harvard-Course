@@ -122,6 +122,7 @@ def utility(board):
 def minimax(board):
     """
     Returns the optimal action for the current player on the board.
+    Uses a recursion returning finished game at the bottom recursion.
     """
 
     def max_value(mm_board):
