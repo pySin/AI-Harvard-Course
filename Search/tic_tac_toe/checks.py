@@ -137,3 +137,32 @@
 #
 # n1 = 0
 # function1(n1)
+
+# Get Value From bottom recursion
+
+def function1(n):
+    if n == 100:
+        return f"Target number reached: {n}"
+    n += 1
+    print(f"N: {n}")
+    result = function2(n)
+    print(f"Result: {result}")
+    print(f"Post Result N: {n}")
+
+    return result
+
+
+def function2(n):
+    if n == 100:
+        return f"Targe number reached: {n}"
+    n += 1
+    print(f"N: {n}")
+    result = function1(n)
+    print(f"Result: {result}")
+    print(f"Post Result N: {n}")
+
+    return result
+
+
+n1 = 0
+function1(n1)
