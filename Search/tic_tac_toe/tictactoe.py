@@ -135,8 +135,10 @@ def minimax(board):
 
         # Store actions(moves) and their evaluations(1, -1, 0).
         action_results = []
-        if terminal(mm_board):
 
+        # At the bottom recursion level the game should finish
+        # and return 1 if X won, -1 if O won and 0 if game is tie.
+        if terminal(mm_board):
             return utility(mm_board)
 
         v = -math.inf
@@ -164,8 +166,12 @@ def minimax(board):
 
         # Store actions(moves) and their evaluations(1, -1, 0).
         action_results = []
+
+        # At the bottom recursion level the game should finish
+        # and return 1 if X won, -1 if O won and 0 if game is tie.
         if terminal(mm_board):
             return utility(mm_board)
+
         v = math.inf
         available_actions = actions(mm_board)
         for action in available_actions:
