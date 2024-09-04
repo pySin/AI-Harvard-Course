@@ -8,3 +8,6 @@ import tictactoe as ttt
 @pt.mark.parametrize("execution_number", range(10))
 def test(execution_number):
     return play_ai_vs_ai()
+
+# Assisting Function
+
