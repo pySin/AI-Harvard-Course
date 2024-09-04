@@ -144,25 +144,17 @@ def function1(n):
     if n == 100:
         return f"Target number reached: {n}"
     n += 1
-    print(f"N: {n}")
-    result = function2(n)
-    print(f"Result: {result}")
-    print(f"Post Result N: {n}")
 
-    return result
+    return function2(n)
 
 
 def function2(n):
     if n == 100:
         return f"Targe number reached: {n}"
     n += 1
-    print(f"N: {n}")
-    result = function1(n)
-    print(f"Result: {result}")
-    print(f"Post Result N: {n}")
 
-    return result
+    return function1(n)
 
 
 n1 = 0
-function1(n1)
+print(function1(n1))
