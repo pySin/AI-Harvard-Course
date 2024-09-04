@@ -150,6 +150,9 @@ def minimax(board):
         # For each test game turn go deeper into the recursion
         # and activate the antagonist function until the board is full.
         for action in available_actions:
+
+            # Compare the biggest result so far with the result from
+            # the current move and assign.
             v = max(v, min_value(result(mm_board, action)))
             action_results.append([v, action])
 
@@ -187,6 +190,9 @@ def minimax(board):
         # For each test game turn go deeper into the recursion
         # and activate the antagonist function until the board is full.
         for action in available_actions:
+
+            # Compare the smallest result so far with the result from
+            # the current move and assign.
             v = min(v, max_value(result(mm_board, action)))
             action_results.append([v, action])
         length = sum([len([c for c in r if c is None]) for r in board])
