@@ -159,6 +159,9 @@ def minimax(board):
         # Get the original board length to compare with the best move candidates.
         length = sum([len([c for c in r if c is None]) for r in board])
 
+        # If the move candidates are the same number as the empty cells
+        # in the original board it meat that the deepest level in the
+        # recursion is reached and the best move has to be picked.
         if len(action_results) == length:
             max_result = max([a[0] for a in action_results])
             best_action = (next(ba for ba in action_results if ba[0] == max_result), None)
@@ -200,7 +203,9 @@ def minimax(board):
         # Get the original board length to compare with the best move candidates.
         length = sum([len([c for c in r if c is None]) for r in board])
 
-
+        # If the move candidates are the same number as the empty cells
+        # in the original board it meat that the deepest level in the
+        # recursion is reached and the best move has to be picked.
         if len(action_results) == length:
             min_result = min([a[0] for a in action_results])
             best_action = (next(ba for ba in action_results if ba[0] == min_result), None)
