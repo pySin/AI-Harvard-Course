@@ -117,6 +117,7 @@ def function1(n):
     n += 1
     print(f"N: {n}")
     result = function2(n)
+    print(f"Result: {result}")
     print(f"Post Result N: {n}")
 
 
@@ -126,6 +127,7 @@ def function2(n):
     n += 1
     print(f"N: {n}")
     result = function1(n)
+    print(f"Result: {result}")
     print(f"Post Result N: {n}")
 
 
