@@ -140,21 +140,33 @@
 
 # Get Value From bottom recursion
 
-def function1(n):
-    if n == 100:
-        return f"Target number reached: {n}"
-    n += 1
+# def function1(n):
+#     if n == 100:
+#         return f"Target number reached: {n}"
+#     n += 1
+#
+#     return function2(n)
+#
+#
+# def function2(n):
+#     if n == 100:
+#         return f"Target number reached: {n}"
+#     n += 1
+#
+#     return function1(n)
+#
+#
+# n1 = 0
+# print(function1(n1))
 
-    return function2(n)
+# -- Nested Function call
+
+def nest_1(text_1):
+    return text_1 + "ending"
 
 
-def function2(n):
-    if n == 100:
-        return f"Targe number reached: {n}"
-    n += 1
-
-    return function1(n)
+def nest_2(text_2):
+    return text_2 + "second"
 
 
-n1 = 0
-print(function1(n1))
+print(nest_2(nest_1("First text")))
