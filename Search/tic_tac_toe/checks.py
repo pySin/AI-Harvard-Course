@@ -130,3 +130,4 @@ def function2(n):
 
 
 n1 = 0
+function1(n1)
