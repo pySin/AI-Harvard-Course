@@ -2,6 +2,7 @@
 import copy
 import math
 
+# Player Symbols
 X = "X"
 O = "O"
 EMPTY = None
@@ -112,7 +113,6 @@ def minimax(board):
 
     def max_value(mm_board):
         action_results = []
-        # print("In max value")
         if terminal(mm_board):
             print(f"Max Value Terminal Section: {mm_board}")
 
@@ -120,17 +120,9 @@ def minimax(board):
         v = -math.inf
         available_actions = actions(mm_board)
         for action in available_actions:
-            # print(action)
             v = max(v, min_value(result(mm_board, action)))
-            # print(f"Result function result: {result(mm_board, action)}:")
-            # print(f"Value in max function: {v}")
-            # print(f"Max Value Last Action: {action}")
             action_results.append([v, action])
-            # print(f"Available Actions: {available_actions}")
-            # print(f"Final Action results: {action_results}")
-        # print(f"Available Actions: {len(available_actions)}")
-        # print(f"Action results: {len(action_results)}")
-        # print(f"Original Board length: {len([c for c in board if c is None])}")
+
         print(f"Board: {board}")
         length = sum([len([c for c in r if c is None]) for r in board])
         print(f"Board Length: {length}")
@@ -149,18 +141,10 @@ def minimax(board):
             print(f"Min Value Terminal Section: {board}")
             return utility(mm_board)
         v = math.inf
-        # print(f"Actions mm_board: {actions(mm_board)}")
         available_actions = actions(mm_board)
         for action in available_actions:
             v = min(v, max_value(result(mm_board, action)))
-            # print(f"Result function result: {result(mm_board, action)}:")
-            # print(f"Value in min function: {v}")
-            # print(f"Min Value Last Action: {action}")
             action_results.append([v, action])
-            # print(f"Action Results: {action_results}")
-        # print(f"Available Actions: {len(available_actions)}")
-        # print(f"Action results: {len(action_results)}")
-        # print(f"Original Board length: {len([c for c in board if c is None])}")
         print(f"Board: {board}")
         length = sum([len([c for c in r if c is None]) for r in board])
         print(f"Board Length: {length}")
@@ -177,9 +161,9 @@ def minimax(board):
     print(f"Current Player: {current_player}")
     if current_player == "X":
         x_value = max_value(board)
-        print(f"Last X value: {x_value}")  # The script does not reach here
-        return x_value  # return a move(tuple)
+        print(f"Last X value: {x_value}")
+        return x_value
     else:
         o_value = min_value(board)
-        print(f"Last O value: {o_value}")  # The script does not reach here
-        return o_value  # return a move(tuple)
+        print(f"Last O value: {o_value}")
+        return o_value
