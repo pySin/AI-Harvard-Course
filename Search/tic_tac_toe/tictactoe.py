@@ -8,6 +8,7 @@ O = "O"
 EMPTY = None
 
 
+# Set Initial Tic Tac Toe state with 8 empty cells.
 def initial_state():
     """
     Returns starting state of the board.
