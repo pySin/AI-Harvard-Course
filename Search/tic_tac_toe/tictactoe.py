@@ -132,6 +132,8 @@ def minimax(board):
         :param mm_board: Tic Tac Toe play board
         :return: a tuple, move coordinates
         """
+
+        # Store actions(moves) with their evaluations(1, -1, 0).
         action_results = []
         if terminal(mm_board):
 
@@ -161,16 +163,13 @@ def minimax(board):
         """
         action_results = []
         if terminal(mm_board):
-            print(f"Min Value Terminal Section: {board}")
             return utility(mm_board)
         v = math.inf
         available_actions = actions(mm_board)
         for action in available_actions:
             v = min(v, max_value(result(mm_board, action)))
             action_results.append([v, action])
-        print(f"Board: {board}")
         length = sum([len([c for c in r if c is None]) for r in board])
-        print(f"Board Length: {length}")
 
         if len(action_results) == length:
             min_result = min([a[0] for a in action_results])
