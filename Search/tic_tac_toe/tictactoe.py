@@ -142,7 +142,13 @@ def minimax(board):
             return utility(mm_board)
 
         v = -math.inf
+
+        # Get the empty cells from the test board
+        # for the specific recursion board.
         available_actions = actions(mm_board)
+
+        # For each test game turn go deeper into the recursion
+        # and activate the antagonist function until the board is full.
         for action in available_actions:
             v = max(v, min_value(result(mm_board, action)))
             action_results.append([v, action])
@@ -173,7 +179,13 @@ def minimax(board):
             return utility(mm_board)
 
         v = math.inf
+
+        # Get the empty cells from the test board
+        # for the specific recursion board.
         available_actions = actions(mm_board)
+
+        # For each test game turn go deeper into the recursion
+        # and activate the antagonist function until the board is full.
         for action in available_actions:
             v = min(v, max_value(result(mm_board, action)))
             action_results.append([v, action])
