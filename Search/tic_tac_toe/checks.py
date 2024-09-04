@@ -89,20 +89,44 @@
 
 # -- Double Function Recursion
 
+# def function1(n):
+#     if n == 100:
+#         return f"Targe number reached: {n}"
+#
+#     n += 1
+#     return function2(n)
+#
+#
+# def function2(n):
+#     if n == 100:
+#         return f"Targe number reached: {n}"
+#
+#     return function1(n)
+
+
+# number = 0
+# print(function2(number))
+
+
+# -- Double Function Recursion / Recursion in middle function
+
+
 def function1(n):
     if n == 100:
-        return f"Targe number reached: {n}"
-
+        return f"Target number reached: {n}"
     n += 1
-    return function2(n)
+    print(f"N: {n}")
+    result = function2(n)
+    print(f"Post Result N: {n}")
 
 
 def function2(n):
     if n == 100:
         return f"Targe number reached: {n}"
+    n += 1
+    print(f"N: {n}")
+    result = function1(n)
+    print(f"Post Result N: {n}")
 
-    return function1(n)
 
-
-number = 0
-print(function2(number))
+n1 = 0
