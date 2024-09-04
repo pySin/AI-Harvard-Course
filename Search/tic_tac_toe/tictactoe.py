@@ -49,7 +49,6 @@ def result(board, action):
     Another cell is taken(played).
     """
     if action not in actions(board):
-        print(f"Non Available Move: {action}")
         raise Exception("This move is not available!")
 
     # Make and modify a deep copy of the board, so it doesn't
@@ -63,7 +62,9 @@ def result(board, action):
 def winner(board):
     """
     Returns the winner of the game, if there is one.
+    Result of 1 means X is winner, -1 - O is winner, 0 - the game is a tie.
     """
+
     # Check for row win
     for row in board:
         if all([c == "X" for c in row]):
@@ -78,6 +79,7 @@ def winner(board):
         if all([board[i][j] == "O" for i in range(len(board))]):
             return "O"
 
+    # Check for diagonal win.
     for p in [X, O]:
         if all([board[0][0] == p, board[1][1] == p, board[2][2] == p]):
             return p
