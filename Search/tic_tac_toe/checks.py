@@ -161,12 +161,14 @@
 
 # -- Nested Function call
 
-def nest_1(text_1):
-    return text_1 + "ending"
+# def nest_1(text_1):
+#     return text_1 + "ending"
+#
+#
+# def nest_2(text_2):
+#     return text_2 + "second"
+#
+#
+# print(nest_2(nest_1("First text")))  # Return a function as an argument of another.
 
 
-def nest_2(text_2):
-    return text_2 + "second"
-
-
-print(nest_2(nest_1("First text")))  # Return a function as an argument of another.

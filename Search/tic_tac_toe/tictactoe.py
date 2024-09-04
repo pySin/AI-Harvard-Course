@@ -165,7 +165,8 @@ def minimax(board):
         if len(action_results) == length:
             max_result = max([a[0] for a in action_results])
             # Get the first Max result. The rest of the loop is not needed.
-            best_action = (next(ba for ba in action_results if ba[0] == max_result), None)
+            # best_action = (next(ba for ba in action_results if ba[0] == max_result), None)
+            best_action = (next(ba for ba in action_results if ba[0] == v), None)
             return best_action[0][1]
 
         return v
@@ -211,7 +212,8 @@ def minimax(board):
             min_result = min([a[0] for a in action_results])
 
             # Get the first Max result. The rest of the loop is not needed.
-            best_action = (next(ba for ba in action_results if ba[0] == min_result), None)
+            # best_action = (next(ba for ba in action_results if ba[0] == min_result), None)
+            best_action = (next(ba for ba in action_results if ba[0] == v), None)
             return best_action[0][1]
 
         return v
