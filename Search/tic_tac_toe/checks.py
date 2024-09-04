@@ -87,4 +87,12 @@
 #
 # print(tictactoe.minimax(current_state))
 
+# -- Double Function Recursion
+
+def function1(n):
+    if n == 100:
+        return f"Targe number reached: {n}"
+
+
+
 
