@@ -126,18 +126,23 @@ def minimax(board):
     """
 
     def max_value(mm_board):
+        """
+        Through 2 function cross recursion look for a result
+        of a finished game optimal for the X player.
+        :param mm_board:
+        :return:
+        """
         action_results = []
         if terminal(mm_board):
-            print(f"Max Value Terminal Section: {mm_board}")
 
             return utility(mm_board)
+
         v = -math.inf
         available_actions = actions(mm_board)
         for action in available_actions:
             v = max(v, min_value(result(mm_board, action)))
             action_results.append([v, action])
 
-        print(f"Board: {board}")
         length = sum([len([c for c in r if c is None]) for r in board])
         print(f"Board Length: {length}")
 
