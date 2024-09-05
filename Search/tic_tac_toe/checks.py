@@ -174,20 +174,20 @@
 # -- Recursion with nested function call with Terminal returning function.
 import random
 
-numbers_set = set()
+numbers_set = []
 
 
 def terminal(n_set):
-    three_numbers = {n for n in range(len(n_set), 0, -1)}
+    three_numbers = n_set[-3:]
     if sum(three_numbers) == 9:
         return True
     return False
 
 
 def initial_numbers():
-    initial_n = set()
+    initial_n = []
     for _ in range(3):
-        initial_n.add(random.randint(1, 9))
+        initial_n.append(random.randint(1, 9))
     return initial_n
 
 
@@ -205,19 +205,20 @@ def number_1(num_set):
     if terminal(num_set):
         return f"The last three digits equals to {sum(num_set[-3:])}"
 
-    num_set.add(modify_number(generate_number() - 1))
+    num_set.append(modify_number(generate_number() - 1))
     phrase = number_2(num_set)
     return phrase
 
 
 def number_2(num_set):
+    print(f"Num Set: {num_set}")
     if terminal(num_set):
         return f"The last three digits equals to {sum(num_set[-3:])}"
 
-    num_set.add(modify_number(generate_number() - 1))
+    num_set.append(modify_number(generate_number() - 1))
     phrase = number_1(num_set)
     return phrase
 
 
 first_numbers = initial_numbers()
-number_1(first_numbers)
+print(number_1(first_numbers))
