@@ -204,9 +204,12 @@ def number_1(num_set):
     if terminal(num_set):
         return f"The last three digits equals to {sum(num_set[-3:])}"
 
-    new_number = modify_number(generate_number())
+    new_number = modify_number(generate_number() - 1)
 
 
 def number_2(num_set):
-    pass
+    if terminal(num_set):
+        return f"The last three digits equals to {sum(num_set[-3:])}"
+
+    new_number = modify_number(generate_number() - 1)
 
