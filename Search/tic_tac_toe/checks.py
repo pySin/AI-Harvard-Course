@@ -176,3 +176,32 @@ import random
 
 numbers_set = set()
 
+
+def terminal(n_set):
+    three_numbers = numbers_set[-3:]
+    if sum(three_numbers) == 9:
+        return True
+    return False
+
+
+def initial_numbers():
+    initial_n = set()
+    for _ in range(3):
+        initial_n.add(random.randint(1, 9))
+    return initial_n
+
+
+def generate_number():
+    return random.randint(1, 9)
+
+
+def number_1(num_set):
+    if terminal(num_set):
+        return f"The last three digits equals to {sum(num_set[-3:])}"
+
+    new_number = None
+
+
+def number_2(num_set):
+    pass
+
