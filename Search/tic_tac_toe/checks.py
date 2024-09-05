@@ -171,4 +171,8 @@
 #
 # print(nest_2(nest_1("First text")))  # Return a function as an argument of another.
 
+# -- Recursion with nested function call with Terminal returning function.
+import random
+
+numbers_set = set()
 
