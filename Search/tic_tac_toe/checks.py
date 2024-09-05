@@ -178,7 +178,7 @@ numbers_set = set()
 
 
 def terminal(n_set):
-    three_numbers = numbers_set[-3:]
+    three_numbers = n_set[-3:]
     if sum(three_numbers) == 9:
         return True
     return False
@@ -204,12 +204,17 @@ def number_1(num_set):
     if terminal(num_set):
         return f"The last three digits equals to {sum(num_set[-3:])}"
 
-    new_number = modify_number(generate_number() - 1)
+    phrase = number_2(num_set.add(modify_number(generate_number() - 1)))
+    return phrase
 
 
 def number_2(num_set):
     if terminal(num_set):
         return f"The last three digits equals to {sum(num_set[-3:])}"
 
-    new_number = modify_number(generate_number() - 1)
+    phrase = number_1(num_set.add(modify_number(generate_number() - 1)))
+    return phrase
 
+
+first_numbers = initial_numbers()
+number_1(first_numbers)
