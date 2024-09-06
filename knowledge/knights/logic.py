@@ -194,3 +194,16 @@ class Implication(Sentence):
 
     def symbols(self):
         return set.union(self.antecedent.symbols(), self.consequent.symbols())
+
+
+class Biconditional(Sentence):
+    def __init__(self, left, right):
+        Sentence.validate(left)
+        Sentence.validate(right)
+        self.left = left
+        self.right = right
+
+    def __eq__(self, other):
+        return (isinstance(other, Biconditional)
+                and self.left == other.left
+                and self.right == other.right)
