@@ -227,3 +227,9 @@ class Biconditional(Sentence):
 
     def symbols(self):
         return set.union(self.left.symbols(), self.right.symbols())
+
+def model_check(knowledge, query):
+    """Checks if knowledge base entails query."""
+
+    def check_all(knowledge, query, symbols, model):
+        """Checks if knowledge base entails query, given a particular model."""
