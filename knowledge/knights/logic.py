@@ -179,3 +179,10 @@ class Implication(Sentence):
 
     def __hash__(self):
         return hash(("implies", hash(self.antecedent), hash(self.consequent)))
+
+    def __repr__(self):
+        return f"Implication({self.antecedent}, {self.consequent})"
+
+    def evaluate(self, model):
+        return ((not self.antecedent.evaluate(model))
+                or self.consequent.evaluate(model))
