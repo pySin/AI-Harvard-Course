@@ -207,6 +207,7 @@ def number_1(num_set):
 
     num_set.append(modify_number(generate_number() - 1))
     phrase = number_2(num_set)
+    print(f"Number 1 Phrase: {phrase}")
     return phrase
 
 
@@ -217,6 +218,7 @@ def number_2(num_set):
 
     num_set.append(modify_number(generate_number() - 1))
     phrase = number_1(num_set)
+    print(f"Number 2 Phrase: {phrase}")
     return phrase
 
 
