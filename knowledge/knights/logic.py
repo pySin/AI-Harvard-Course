@@ -66,6 +66,11 @@ class Symbol(Sentence):
         except KeyError:
             raise Exception(f"variable {self.name} not in model")
 
+    def formula(self):
+        return self.name
+
+    def symbols(self):
+        return {self.name}
 
 
 
