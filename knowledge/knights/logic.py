@@ -214,4 +214,13 @@ class Biconditional(Sentence):
     def __repr__(self):
         return f"Biconditional({self.left}, {self.right})"
 
+    def evaluate(self, model):
+        return ((self.left.evaluate(model)
+                 and self.right.evaluate(model))
+                or (not self.left.evaluate(model)
+                    and not self.right.evaluate(model)))
 
+    def formula(self):
+        left = Sentence.parenthesize(str(self.left))
+        right = Sentence.parenthesize(str(self.right))
+        return f"{left} <=> {right}"
