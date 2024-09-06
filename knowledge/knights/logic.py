@@ -224,3 +224,6 @@ class Biconditional(Sentence):
         left = Sentence.parenthesize(str(self.left))
         right = Sentence.parenthesize(str(self.right))
         return f"{left} <=> {right}"
+
+    def symbols(self):
+        return set.union(self.left.symbols(), self.right.symbols())
