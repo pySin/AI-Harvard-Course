@@ -254,3 +254,7 @@ def model_check(knowledge, query):
             # Create a model where the symbol is false
             model_false = model.copy()
             model_false[p] = False
+
+            # Ensure entailment holds in both models
+            return (check_all(knowledge, query, remaining, model_true) and
+                    check_all(knowledge, query, remaining, model_false))
