@@ -229,12 +229,12 @@
 
 # Multiple variable in sequence
 
-V = 2
-
-sequence = [
-    [V, V, V],
-    [V, V, V],
-    [V, V, V]
-]
-
-print(sequence)
+# V = 2
+#
+# sequence = [
+#     [V, V, V],
+#     [V, V, V],
+#     [V, V, V]
+# ]
+#
+# print(sequence)
