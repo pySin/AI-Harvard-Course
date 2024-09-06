@@ -42,3 +42,8 @@ class Sentence():
         else:
             return f"({s})"
 
+
+class Symbol(Sentence):
+
+    def __init__(self, name):
+        self.name = name
