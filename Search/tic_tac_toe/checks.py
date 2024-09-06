@@ -172,55 +172,59 @@
 # print(nest_2(nest_1("First text")))  # Return a function as an argument of another.
 
 # -- Recursion with nested function call with Terminal returning function.
-import random
+# import random
+#
+# numbers_set = []
+#
+#
+# def terminal(n_set):
+#     three_numbers = n_set[-3:]
+#     if sum(three_numbers) == 9:
+#         return True
+#     return False
+#
+#
+# def initial_numbers():
+#     initial_n = []
+#     for _ in range(3):
+#         initial_n.append(random.randint(1, 9))
+#     return initial_n
+#
+#
+# def generate_number():
+#     return random.randint(1, 9)
+#
+#
+# def modify_number(num):
+#     modifier = random.randint(-1, 1)
+#     return num + modifier
+#
+#
+# def number_1(num_set):
+#     print(f"Num Set: {num_set}")
+#     if terminal(num_set):
+#         return f"The last three digits equals to {sum(num_set[-3:])}"
+#
+#     num_set.append(modify_number(generate_number() - 1))
+#     phrase = number_2(num_set)
+#     print(f"Number 1 Phrase: {phrase}")
+#     return phrase
+#
+#
+# def number_2(num_set):
+#     print(f"Num Set: {num_set}")
+#     if terminal(num_set):
+#         return f"The last three digits equals to {sum(num_set[-3:])}"
+#
+#     num_set.append(modify_number(generate_number() - 1))
+#     phrase = number_1(num_set)
+#     print(f"Number 2 Phrase: {phrase}")
+#     return phrase
+#
+#
+# first_numbers = initial_numbers()
+# print(number_1(first_numbers))
 
-numbers_set = []
+# Second Clone Check
 
 
-def terminal(n_set):
-    three_numbers = n_set[-3:]
-    if sum(three_numbers) == 9:
-        return True
-    return False
-
-
-def initial_numbers():
-    initial_n = []
-    for _ in range(3):
-        initial_n.append(random.randint(1, 9))
-    return initial_n
-
-
-def generate_number():
-    return random.randint(1, 9)
-
-
-def modify_number(num):
-    modifier = random.randint(-1, 1)
-    return num + modifier
-
-
-def number_1(num_set):
-    print(f"Num Set: {num_set}")
-    if terminal(num_set):
-        return f"The last three digits equals to {sum(num_set[-3:])}"
-
-    num_set.append(modify_number(generate_number() - 1))
-    phrase = number_2(num_set)
-    print(f"Number 1 Phrase: {phrase}")
-    return phrase
-
-
-def number_2(num_set):
-    print(f"Num Set: {num_set}")
-    if terminal(num_set):
-        return f"The last three digits equals to {sum(num_set[-3:])}"
-
-    num_set.append(modify_number(generate_number() - 1))
-    phrase = number_1(num_set)
-    print(f"Number 2 Phrase: {phrase}")
-    return phrase
-
-
-first_numbers = initial_numbers()
-print(number_1(first_numbers))
