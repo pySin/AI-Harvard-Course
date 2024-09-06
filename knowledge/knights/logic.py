@@ -73,5 +73,13 @@ class Symbol(Sentence):
         return {self.name}
 
 
+class Not(Sentence):
+    def __init__(self, operand):
+        Sentence.validate(operand)
+        self.operand = operand
+
+    def __eq__(self, other):
+        return isinstance(other, Not) and self.operand == other.operand
+
 
 
