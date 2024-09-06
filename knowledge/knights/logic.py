@@ -15,3 +15,23 @@ class Sentence():
         """Returns a set of all symbols in the logical sentence."""
         return set()
 
+    @classmethod
+    def validate(cls, sentence):
+        if not isinstance(sentence, Sentence):
+            raise TypeError("must be a logical sentence")
+
+    @classmethod
+    def parenthesize(cls, s):
+        """Parenthesizes an expression if not already parenthesized."""
+        def balanced(s):
+            """Checks if a string has balanced parentheses."""
+            count = 0
+            for c in s:
+                if c == "(":
+                    count += 1
+                elif c == ")":
+                    if count <= 0:
+                        return False
+                    count -= 1
+            return count == 0
+
