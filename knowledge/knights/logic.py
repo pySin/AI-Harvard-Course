@@ -241,3 +241,16 @@ def model_check(knowledge, query):
             if knowledge.evaluate(model):
                 return query.evaluate(model)
             return True
+        else:
+
+            # Choose one of the remaining unused symbols
+            remaining = symbols.copy()
+            p = remaining.pop()
+
+            # Create a model where the symbol is true
+            model_true = model.copy()
+            model_true[p] = True
+
+            # Create a model where the symbol is false
+            model_false = model.copy()
+            model_false[p] = False
