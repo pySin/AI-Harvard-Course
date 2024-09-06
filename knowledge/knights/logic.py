@@ -147,3 +147,11 @@ class Or(Sentence):
         return hash(
             ("or", tuple(hash(disjunct) for disjunct in self.disjuncts))
         )
+
+    def __repr__(self):
+        disjuncts = ", ".join([str(disjunct) for disjunct in self.disjuncts])
+        return f"Or({disjuncts})"
+
+    def evaluate(self, model):
+        return any(disjunct.evaluate(model) for disjunct in self.disjuncts)
+
