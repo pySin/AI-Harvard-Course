@@ -155,3 +155,11 @@ class Or(Sentence):
     def evaluate(self, model):
         return any(disjunct.evaluate(model) for disjunct in self.disjuncts)
 
+    def formula(self):
+        if len(self.disjuncts) == 1:
+            return self.disjuncts[0].formula()
+        return " ∨  ".join([Sentence.parenthesize(disjunct.formula())
+                            for disjunct in self.disjuncts])
+
+    def symbols(self):
+        return set.union(*[disjunct.symbols() for disjunct in self.disjuncts])
