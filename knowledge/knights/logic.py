@@ -111,5 +111,13 @@ class And(Sentence):
             ("and", tuple(hash(conjunct) for conjunct in self.conjuncts))
         )
 
+    def __repr__(self):
+        conjunctions = ", ".join(
+            [str(conjunct) for conjunct in self.conjuncts]
+        )
+        return f"And({conjunctions})"
 
+    def add(self, conjunct):
+        Sentence.validate(conjunct)
+        self.conjuncts.append(conjunct)
 
