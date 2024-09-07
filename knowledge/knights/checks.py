@@ -7,4 +7,3 @@ class CLSClass:
         self.num = num
 
 
-
