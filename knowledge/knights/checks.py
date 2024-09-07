@@ -13,6 +13,10 @@ class BasicPizza:
     def peperoni(cls):
         return cls("dove", "tomato", "peperoni", "salami")
 
+    @classmethod
+    def mushroom(cls):
+        return cls("dove", "tomato", "mushroom", "cheese")
+
 
 peperoni_pizza = BasicPizza.peperoni()
 
