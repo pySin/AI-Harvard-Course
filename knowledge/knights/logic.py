@@ -57,9 +57,6 @@ class Symbol(Sentence):
     def __repr__(self):
         return self.name
 
-    def __repr__(self):
-        return self.name
-
     def evaluate(self, model):
         try:
             return bool(model[self.name])
