@@ -19,8 +19,11 @@ class BasicPizza:
 
 
 peperoni_pizza = BasicPizza.peperoni()
-
-
+print(peperoni_pizza.extra_1)
+print(peperoni_pizza.extra_2)
+mushroom_pizza = BasicPizza.mushroom()
+print(mushroom_pizza.extra_1)
+print(mushroom_pizza.extra_2)
 
 
 
