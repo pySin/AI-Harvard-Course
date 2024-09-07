@@ -25,6 +25,19 @@
 # print(mushroom_pizza.extra_1)
 # print(mushroom_pizza.extra_2)
 
-# --
+# -- Simple function string return
+
+def text_1():
+    return "a"
 
 
+def text_2():
+    return "b"
+
+
+def text_c(letter):
+    return letter + "c"
+
+
+print(text_1() + text_2())
+print(text_c(text_1()))
