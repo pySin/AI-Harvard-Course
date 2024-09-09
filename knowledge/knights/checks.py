@@ -27,17 +27,25 @@
 
 # -- Simple function string return
 
-def text_1():
-    return "a"
+# def text_1():
+#     return "a"
+#
+#
+# def text_2():
+#     return "b"
+#
+#
+# def text_c(letter):
+#     return letter + "c"
+#
+#
+# print(text_1() + text_2())
+# print(text_c(text_1()))
 
+# -- sorted() recall
 
-def text_2():
-    return "b"
+words = ["no", "you", "I"]
 
+sorted_words = sorted(words, key=len)
+print(sorted_words)
 
-def text_c(letter):
-    return letter + "c"
-
-
-print(text_1() + text_2())
-print(text_c(text_1()))
