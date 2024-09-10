@@ -55,8 +55,17 @@ def sorted_by_vowels(word):
     return vowel_count
 
 
+def sorted_by_non_vowels(word):
+    vowel_count = 0
+    for letter in word:
+        if letter not in "aoiue":
+            vowel_count += 1
+    return vowel_count
+
+
 sorted_words = sorted(words, key=len)
 print(sorted_words)
 
 sort_by_vowels = sorted(words, key=sorted_by_vowels, reverse=True)
 print(sort_by_vowels)
+
