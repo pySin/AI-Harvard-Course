@@ -44,30 +44,102 @@
 
 # -- sorted() recall
 
-words = ["ino", "you", "I", "immobilized"]
+# words = ["ino", "you", "I", "immobilized"]
+#
+#
+# def sorted_by_vowels(word):
+#     vowel_count = 0
+#     for letter in word:
+#         if letter in "aoiue":
+#             vowel_count += 1
+#     return vowel_count
+#
+#
+# def sorted_by_consonants(word):
+#     vowel_count = 0
+#     for letter in word:
+#         if letter not in "aoiue":
+#             vowel_count += 1
+#     return vowel_count
+#
+#
+# sorted_words = sorted(words, key=len)
+# print(sorted_words)
+#
+# sort_by_vowels = sorted(words, key=sorted_by_vowels, reverse=True)
+# print(sort_by_vowels)
+#
+# sort_by_consonants = sorted(words, key=sorted_by_consonants)
+# print(f"Sorted by Consonants: {sort_by_consonants}")
+
+# -- Validate that object is from particular class
+
+# class Particular:
+#
+#     def __init__(self):
+#         self.collection: list = []
+#
+#     @classmethod
+#     def validate(cls, part):
+#         if isinstance(part, Particular):
+#             print(f"The object is of type Particular: {part}")
+#         else:
+#             raise TypeError("The object must be of type Particular!")
+#
+#     def __repr__(self):
+#         return f"Particular Object"
+#
+#
+# part_1 = Particular()
+# print(part_1)
+# Particular.validate(part_1)
+# a = 1
+# Particular.validate(a)
 
 
-def sorted_by_vowels(word):
-    vowel_count = 0
-    for letter in word:
-        if letter in "aoiue":
-            vowel_count += 1
-    return vowel_count
+# hash() function
+# Produces the same number(hash code) from the same content
+
+# class a1:
+#     @staticmethod
+#     def text_return():
+#         return "a1"
+#
+#
+# class a2:
+#     @staticmethod
+#     def text_return():
+#         return "a1"
+
+# hash_1 = hash("a1")
+# hash_2 = hash(l1)
+# hash_2b = hash(l2)
+# print(hash_1)
+# print(hash_2)
+# print(hash_2b)
 
 
-def sorted_by_consonants(word):
-    vowel_count = 0
-    for letter in word:
-        if letter not in "aoiue":
-            vowel_count += 1
-    return vowel_count
+# o1 = a1()
+# o2 = a2()
+#
+# hash_3 = hash(o1.text_return())
+# hash_4 = hash(o2.text_return())
+# print(f"Hash 3: {hash_3}")
+# print(f"Hash 4: {hash_4}")
 
 
-sorted_words = sorted(words, key=len)
-print(sorted_words)
+# -- Check if key in dictionary
 
-sort_by_vowels = sorted(words, key=sorted_by_vowels, reverse=True)
-print(sort_by_vowels)
+named_collection = {"one": 1, "two": 2, "three": 3, "four": 4}
+name = "five"
 
-sort_by_consonants = sorted(words, key=sorted_by_consonants)
-print(f"Sorted by Consonants: {sort_by_consonants}")
+
+def key_check(dict_x, name_1):
+    try:
+        return bool(dict_x[name_1])
+    except KeyError as ke:
+        return f"Key {ke} is not in the dictionary!"
+
+
+print(key_check(named_collection, name))
+print(key_check(named_collection, "four"))
