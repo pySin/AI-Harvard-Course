@@ -14,9 +14,15 @@ CKnave = Symbol("C is a Knave")
 # A says "I am both a knight and a knave."
 knowledge0 = And(
     Or(AKnight, AKnave),
-
+    Not(AKnight)
 )
 
+# Puzzle 1
+# A says "We are both knaves."
+# B says nothing.
+knowledge1 = And(
+    # TODO
+)
 
 def main():
     symbols = [AKnight, AKnave, BKnight, BKnave, CKnight, CKnave]
