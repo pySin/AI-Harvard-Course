@@ -21,8 +21,9 @@ knowledge0 = And(
 # A says "We are both knaves."
 # B says nothing.
 knowledge1 = And(
-    # TODO
+    Or(AKnight, AKnave)
 )
+
 
 def main():
     symbols = [AKnight, AKnave, BKnight, BKnave, CKnight, CKnave]
