@@ -39,6 +39,16 @@ knowledge2 = And(
 )
 
 
+# Puzzle 3
+# A says either "I am a knight." or "I am a knave.", but you don't know which.
+# B says "A said 'I am a knave'."
+# B says "C is a knave."
+# C says "A is a knight."
+knowledge3 = And(
+    # TODO
+)
+
+
 def main():
     symbols = [AKnight, AKnave, BKnight, BKnave, CKnight, CKnave]
     puzzles = [
