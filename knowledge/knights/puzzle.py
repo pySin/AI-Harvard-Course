@@ -23,8 +23,10 @@ knowledge0 = And(
 knowledge1 = And(
     Or(AKnight, AKnave),
     Or(BKnight, BKnave),
-    Not(And(AKnave, BKnave)),
-    AKnave
+    # Not(And(AKnave, BKnave)),
+    Not(AKnight),
+    Implication(AKnave, BKnight)
+    # AKnave
 )
 
 
