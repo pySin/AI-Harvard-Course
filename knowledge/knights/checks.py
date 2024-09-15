@@ -130,16 +130,26 @@
 
 # -- Check if key in dictionary
 
-named_collection = {"one": 1, "two": 2, "three": 3, "four": 4}
-name = "five"
+# named_collection = {"one": 1, "two": 2, "three": 3, "four": 4}
+# name = "five"
+#
+#
+# def key_check(dict_x, name_1):
+#     try:
+#         return bool(dict_x[name_1])
+#     except KeyError as ke:
+#         return f"Key {ke} is not in the dictionary!"
+#
+#
+# print(key_check(named_collection, name))
+# print(key_check(named_collection, "four"))
+
+# -- Logic classes try
+
+from logic import *
+
+symbol1 = Symbol("Simbol1")
+print(symbol1)
 
 
-def key_check(dict_x, name_1):
-    try:
-        return bool(dict_x[name_1])
-    except KeyError as ke:
-        return f"Key {ke} is not in the dictionary!"
 
-
-print(key_check(named_collection, name))
-print(key_check(named_collection, "four"))
