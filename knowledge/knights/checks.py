@@ -151,5 +151,10 @@ from logic import *
 symbol1 = Symbol("Simbol1")
 print(symbol1)
 
+knowledge_x = And(
+    Not(symbol1)
+)
+result = model_check(knowledge_x, symbol1)
+print(result)
 
 
