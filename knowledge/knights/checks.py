@@ -145,11 +145,12 @@
 # print(key_check(named_collection, "four"))
 
 # -- Logic classes try
-
+# If he gets a bit more money from work he was visiting the Black Club.
 from logic import *
 
-symbol1 = Symbol("Simbol1")
-print(symbol1)
+
+symbol1 = Symbol("A bit more money from work")
+symbol2 = Symbol("Visiting the Black Club")
 
 knowledge_x = And(
     Not(symbol1)
