@@ -171,13 +171,16 @@ class ListExhaust:
 
         item = source_list.pop()
         if not source_list:
+            self.new_list.append(item)
             return item
         returned_item = self.explore_function(source_list)
-        self.new_list.append(returned_item)
+        # self.new_list.append(returned_item)
+        self.new_list.append(item)
         print(self.new_list)
         return item
 
 
 vehicles = ["Car", "Bicycle", "Bus", "Truck", "PickUP"]
-print(explore_function(vehicles))
+deep_list = ListExhaust()
+print(deep_list.explore_function(vehicles))
 
