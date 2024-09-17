@@ -167,10 +167,12 @@
 def explore_function(source_list):
 
     new_list = []
-    new_list.append(source_list.pop())
+    item = source_list.pop()
     if not source_list:
         return new_list
-    return explore_function(source_list)
+    explore_function(source_list)
+    new_list.append(item)
+    return new_list
 
 
 vehicles = ["Car", "Bicycle", "Bus", "Truck", "PickUP"]
