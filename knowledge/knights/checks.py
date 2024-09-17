@@ -164,15 +164,18 @@
 
 # --
 
-def explore_function(source_list):
-
+class ListExhaust:
     new_list = []
-    item = source_list.pop()
-    if not source_list:
+
+    def explore_function(self, source_list):
+
+        item = source_list.pop()
+        if not source_list:
+            return item
+        returned_item = self.explore_function(source_list)
+        self.new_list.append(returned_item)
+        print(self.new_list)
         return item
-    returned_item = explore_function(source_list)
-    new_list.append(returned_item)
-    return new_list
 
 
 vehicles = ["Car", "Bicycle", "Bus", "Truck", "PickUP"]
