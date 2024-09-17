@@ -173,7 +173,8 @@ class ListExhaust:
         if not source_list:
             self.new_list.append(item)
             return item
-        returned_item = self.explore_function(source_list)
+        # returned_item = self.explore_function(source_list)
+        self.explore_function(source_list)
         # self.new_list.append(returned_item)
         self.new_list.append(item)
         print(self.new_list)
