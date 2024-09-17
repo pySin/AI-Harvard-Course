@@ -146,19 +146,34 @@
 
 # -- Logic classes try
 # If he gets a bit more money from work he was visiting the Black Club.
-from logic import *
+# from logic import *
+#
+#
+# symbol1 = Symbol("A bit more money from work")
+# symbol2 = Symbol("Visiting the Black Club")
+# symbols = [symbol1, symbol2]
+#
+# knowledge_x = And(
+#     Not(symbol1),
+#     Or(Not(symbol1), symbol2)
+# )
+# for s in symbols:
+#     result = model_check(knowledge_x, s)
+#     print(result)
 
 
-symbol1 = Symbol("A bit more money from work")
-symbol2 = Symbol("Visiting the Black Club")
-symbols = [symbol1, symbol2]
+# --
 
-knowledge_x = And(
-    Not(symbol1),
-    Or(Not(symbol1), symbol2)
-)
-for s in symbols:
-    result = model_check(knowledge_x, s)
-    print(result)
+def explore_function(source_list):
+
+    item = source_list.pop()
+    if not source_list:
+        print(item)
+    explore_function(source_list)
+
+
+vehicles = ["Car", "Bicycle", "Bus", "Truck", "PickUP"]
+
+
 
 
