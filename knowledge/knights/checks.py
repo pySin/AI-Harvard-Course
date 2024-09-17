@@ -162,26 +162,25 @@
 #     print(result)
 
 
-# --
+# -- Empty a lst with recursion
 
-class ListExhaust:
-    new_list = []
-
-    def explore_function(self, source_list):
-
-        item = source_list.pop()
-        if not source_list:
-            self.new_list.append(item)
-            return item
-        # returned_item = self.explore_function(source_list)
-        self.explore_function(source_list)
-        # self.new_list.append(returned_item)
-        self.new_list.append(item)
-        print(self.new_list)
-        return item
-
-
-vehicles = ["Car", "Bicycle", "Bus", "Truck", "PickUP"]
-deep_list = ListExhaust()
-print(deep_list.explore_function(vehicles))
-
+# class ListExhaust:
+#     new_list = []
+#
+#     def explore_function(self, source_list):
+#
+#         item = source_list.pop()
+#         if not source_list:
+#             self.new_list.append(item)
+#             return item
+#         # returned_item = self.explore_function(source_list)
+#         self.explore_function(source_list)
+#         # self.new_list.append(returned_item)
+#         self.new_list.append(item)
+#         print(self.new_list)
+#         return item
+#
+#
+# vehicles = ["Car", "Bicycle", "Bus", "Truck", "PickUP"]
+# deep_list = ListExhaust()
+# print(deep_list.explore_function(vehicles))
