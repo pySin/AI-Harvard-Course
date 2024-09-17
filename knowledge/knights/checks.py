@@ -169,9 +169,9 @@ def explore_function(source_list):
     new_list = []
     item = source_list.pop()
     if not source_list:
-        return new_list
-    explore_function(source_list)
-    new_list.append(item)
+        return item
+    returned_item = explore_function(source_list)
+    new_list.append(returned_item)
     return new_list
 
 
