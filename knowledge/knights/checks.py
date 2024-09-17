@@ -168,12 +168,10 @@ def explore_function(source_list):
 
     item = source_list.pop()
     if not source_list:
-        print(item)
-    explore_function(source_list)
+        return item
+    return explore_function(source_list)
 
 
 vehicles = ["Car", "Bicycle", "Bus", "Truck", "PickUP"]
-
-
-
+print(explore_function(vehicles))
 
