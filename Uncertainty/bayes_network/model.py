@@ -34,3 +34,13 @@ train = Node(ConditionalProbabilityTable([
     ["heavy", "no", "on time", 0.5],
     ["heavy", "no", "delayed", 0.5],
 ], [rain.distribution, maintenance.distribution]), name="train")
+
+
+# Appointment node is conditional on train
+appointment = Node(ConditionalProbabilityTable([
+    ["on time", "attend", 0.9],
+    ["on time", "miss", 0.1],
+    ["delayed", "attend", 0.6],
+    ["delayed", "miss", 0.4]
+], [train.distribution]), name="appointment")
+
