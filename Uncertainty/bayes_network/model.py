@@ -44,3 +44,10 @@ appointment = Node(ConditionalProbabilityTable([
     ["delayed", "miss", 0.4]
 ], [train.distribution]), name="appointment")
 
+
+# Create a Bayesian Network and add states
+model = BayesianNetwork()
+model.add_states(rain, maintenance, train, appointment)
+
+
+
