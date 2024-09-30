@@ -14,3 +14,10 @@ transitions = ConditionalProbabilityTable([
     ["rain", "sun", 0.3],
     ["rain", "rain", 0.7]
 ], [start])
+
+
+# Create Markov chain
+model = MarkovChain([start, transitions])
+
+# Sample 50 states from chain
+print(model.sample(50))
