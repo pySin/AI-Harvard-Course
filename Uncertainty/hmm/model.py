@@ -22,3 +22,10 @@ transitions = numpy.array(
 
 # Starting probabilities
 starts = numpy.array([0.5, 0.5])
+
+# Create the model
+model = HiddenMarkovModel.from_matrix(
+    transitions, states, starts,
+    state_names=["sun", "rain"]
+)
+model.bake()
