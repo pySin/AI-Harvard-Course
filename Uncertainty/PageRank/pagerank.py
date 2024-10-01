@@ -80,20 +80,19 @@ def sample_pagerank(corpus, damping_factor, n):
     page_visits = {x: 0 for x in corpus}
 
     for i in range(n):
-        page_visit_chances = transition_model(corpus, current_page, DAMPING)
+        page_visit_chances = transition_model(corpus, current_page, damping_factor)
         lower_range = 0
         random_0_to_1 = random.random()
         for key, value in page_visit_chances.items():
             if lower_range < random_0_to_1 < lower_range + value:
                 page_visits[key] += 1
                 current_page = key
-                lower_range = 0
                 break
             else:
                 lower_range += value
 
-    print(f"Page Visits: {page_visits}")
-    return page_visits
+    page_ranks = {x: page_visits[x] / n for x in page_visits}
+    return page_ranks
 
 
 def iterate_pagerank(corpus, damping_factor):
