@@ -88,6 +88,7 @@ def sample_pagerank(corpus, damping_factor, n):
                 page_visits[key] += 1
                 current_page = key
                 lower_range = 0
+                break
             else:
                 lower_range += value
 
