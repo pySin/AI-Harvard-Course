@@ -80,8 +80,10 @@ def sample_pagerank(corpus, damping_factor, n):
     for i in range(n):
         page_visit_chances = transition_model(corpus, current_page, DAMPING)
         lower_range = 0
+        random_0_to_1 = random.random()
         for key, value in page_visit_chances:
-            pass
+            if lower_range < random_0_to_1 <= lower_range + value:
+                current_page = key
 
 
     raise NotImplementedError
