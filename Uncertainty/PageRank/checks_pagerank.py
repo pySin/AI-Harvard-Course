@@ -27,3 +27,11 @@ def transition_model(corpus, page, damping_factor):
 
 
 transition_model(corpus_1, page_1, DAMPING)
+
+
+def random_choice(corpus):
+    first_page = random.choice([x for x in corpus])
+    return first_page
+
+
+print(random_choice(corpus_1))

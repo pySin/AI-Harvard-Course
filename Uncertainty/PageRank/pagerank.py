@@ -75,7 +75,8 @@ def sample_pagerank(corpus, damping_factor, n):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
-    first_random_page = corpus
+    first_page = random.choice([x for x in corpus])
+
     raise NotImplementedError
 
 
