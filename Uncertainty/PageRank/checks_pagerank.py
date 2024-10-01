@@ -35,3 +35,4 @@ def random_choice(corpus):
 
 
 print(random_choice(corpus_1))
+print(random.random())
