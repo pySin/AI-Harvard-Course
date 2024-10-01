@@ -7,11 +7,18 @@ DAMPING = 0.85
 SAMPLES = 10000
 
 
-corpus = {
+corpus_1 = {
     "1.html": {"2.html", "3.html"},
     "2.html": {"3.html"},
     "3.html": {"2.html"}
 }
 
+page_1 = "1.html"
+
+
 def transition_model(corpus, page, damping_factor):
-    pass
+    links = corpus[page]
+    print(links)
+
+
+transition_model(corpus_1, page_1, DAMPING)
