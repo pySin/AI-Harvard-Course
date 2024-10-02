@@ -105,6 +105,12 @@ def iterate_pagerank(corpus, damping_factor):
     PageRank values should sum to 1.
     """
     page_ranks = {r: 1 / len(corpus) for r in corpus}
+    print(f"Corpus: {corpus}")
+    stable_ratings = False
+
+    while not stable_ratings:
+        for page_name, page_rank in page_ranks.items():
+            new_page_rank = (1 - damping_factor / len(corpus))
 
     return page_ranks
 
