@@ -42,4 +42,16 @@ def run_sample_vs_iterate():
     return compare(sample, iterate)
 
 
+def compare(prob1, prob2):
+    for page in prob1.keys():
+        assert prob1[page] == pt.approx(prob2[page], abs=TOLERANCE)
 
+
+def generate_random_data():
+    links = [f"{i}.html" for i in range(rd.randint(1, 10))]
+    page = rd.choice(links)
+    corpus = {
+        link: set(rd.choices(links, k=rd.randint(0, len(links)))) - set([link])
+        for link in links
+    }
+    return corpus, page
