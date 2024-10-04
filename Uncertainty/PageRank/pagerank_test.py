@@ -4,6 +4,7 @@ import pytest as pt
 from pagerank import DAMPING, crawl, iterate_pagerank, sample_pagerank
 
 TOLERANCE = 1e-3  # Error tolerance = ±0.001 when comparing sample and iterate results
+# TOLERANCE = 0.001  # Error tolerance = ±0.001 when comparing sample and iterate results
 SAMPLES = 10 ** 6  # More samples => better result
 
 
@@ -36,6 +37,8 @@ def run_sample_vs_iterate():
     sample = sample_pagerank(corpus, damping_factor=DAMPING, n=SAMPLES)
     iterate = iterate_pagerank(corpus, damping_factor=DAMPING)
 
+    # print(f"Sample Results: {sample}")
+    # print(f"Iterate Results {iterate}")
     checksum(sample)
     checksum(iterate)
 
