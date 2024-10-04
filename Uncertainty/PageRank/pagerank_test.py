@@ -12,3 +12,14 @@ corpus0 = crawl("corpus0")
 
 def test_crawl0():
     assert len(corpus0) == 4
+
+
+def test_iterate0():
+    expected = {"1.html": 0.2202, "2.html": 0.4289, "3.html": 0.2202, "4.html": 0.1307}
+    iterate = iterate_pagerank(corpus0, damping_factor=DAMPING)
+    return compare(iterate, expected)
+
+
+@pt.mark.parametrize("execution_number", range(10))
+def test_sample_vs_iterate(execution_number):
+    return run_sample_vs_iterate()
