@@ -115,7 +115,7 @@ def iterate_pagerank(corpus, damping_factor):
                                                 if lr != page_name
                                                 and page_name in corpus[lr]]))
             new_page_rank = (1 - damping_factor / len(corpus)) + link_weight
-            if not (page_rank - 0.001) < new_page_rank < (page_rank + 0.001):
+            if not (page_rank - 0.0001) < new_page_rank < (page_rank + 0.0001):
                 stable_ratings = False
             page_ranks[page_name] = new_page_rank
 
