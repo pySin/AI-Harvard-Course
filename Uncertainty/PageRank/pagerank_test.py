@@ -7,3 +7,8 @@ TOLERANCE = 1e-3  # Error tolerance = ±0.001 when comparing sample and iterate 
 SAMPLES = 10 ** 6  # More samples => better result
 
 
+corpus0 = crawl("corpus0")
+
+
+def test_crawl0():
+    assert len(corpus0) == 4
