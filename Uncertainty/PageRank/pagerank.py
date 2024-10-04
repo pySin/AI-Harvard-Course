@@ -108,12 +108,16 @@ def iterate_pagerank(corpus, damping_factor):
     print(f"Corpus: {corpus}")
     stable_ratings = False
 
-    # while not stable_ratings:
-    for _ in range(20):
+    while not stable_ratings:
+        # for _ in range(20):
+        stable_ratings = True
+
         for page_name, page_rank in page_ranks.items():
             link_weight = sum([page_ranks[lr] / len(corpus[lr]) for lr in corpus if lr != page_name
                                and page_name in corpus[lr]])
             new_page_rank = (1 - damping_factor / len(corpus)) + link_weight
+            if not page_rank - 0.001 < new_page_rank < page_rank + 0.001:
+                stable_ratings = False
             page_ranks[page_name] = new_page_rank
 
     return page_ranks
