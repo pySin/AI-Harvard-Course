@@ -30,3 +30,16 @@ def checksum(probability):
     assert sum(probability.values()) == pt.approx(1, abs=TOLERANCE)
 
 
+def run_sample_vs_iterate():
+    corpus, _ = generate_random_data()
+
+    sample = sample_pagerank(corpus, damping_factor=DAMPING, n=SAMPLES)
+    iterate = iterate_pagerank(corpus, damping_factor=DAMPING)
+
+    checksum(sample)
+    checksum(iterate)
+
+    return compare(sample, iterate)
+
+
+
