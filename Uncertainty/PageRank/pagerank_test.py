@@ -23,3 +23,10 @@ def test_iterate0():
 @pt.mark.parametrize("execution_number", range(10))
 def test_sample_vs_iterate(execution_number):
     return run_sample_vs_iterate()
+
+
+# additional functions
+def checksum(probability):
+    assert sum(probability.values()) == pt.approx(1, abs=TOLERANCE)
+
+
