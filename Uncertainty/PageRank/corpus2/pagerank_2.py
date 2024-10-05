@@ -67,6 +67,13 @@ def transition_model(corpus, page, damping_factor):
         probability_distribution = {probability_distribution[name]: 1 / len(corpus)
                                     for name in corpus.keys()}
 
+    # Links present in target page
+    else:
+        probability_distribution = {name: (1 - damping_factor) / len(corpus) for name in corpus.keys()}
+        for k in probability_distribution.keys():
+            if k in corpus[page]:
+                probability_distribution[k] += damping_factor / len(corpus[page])
+    return probability_distribution
 
     # links = corpus[page]
     # # return equal probabilities 15% of the time and distributed probabilities 85% of the time

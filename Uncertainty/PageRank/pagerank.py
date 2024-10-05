@@ -58,29 +58,43 @@ def transition_model(corpus, page, damping_factor):
     a link at random chosen from all pages in the corpus.
     """
 
-    prop_dist = {}
+    # prop_dist = {}
+    #
+    # # check if page has outgoing links
+    # dict_len = len(corpus.keys())
+    # pages_len = len(corpus[page])
+    #
+    # if len(corpus[page]) < 1:
+    #     # no outgoing pages, choosing randomly from all possible pages
+    #     for key in corpus.keys():
+    #         prop_dist[key] = 1 / dict_len
+    #
+    # else:
+    #     # there are outgoing pages, calculating distribution
+    #     random_factor = (1 - damping_factor) / dict_len
+    #     even_factor = damping_factor / pages_len
+    #
+    #     for key in corpus.keys():
+    #         if key not in corpus[page]:
+    #             prop_dist[key] = random_factor
+    #         else:
+    #             prop_dist[key] = even_factor + random_factor
 
-    # check if page has outgoing links
-    dict_len = len(corpus.keys())
-    pages_len = len(corpus[page])
+    probability_distribution = {}
 
-    if len(corpus[page]) < 1:
-        # no outgoing pages, choosing randomly from all possible pages
-        for key in corpus.keys():
-            prop_dist[key] = 1 / dict_len
+    # No link page scenario
+    if len(corpus[page]) == 0:
+        probability_distribution = {probability_distribution[name]: 1 / len(corpus)
+                                    for name in corpus.keys()}
 
+    # Links present in target page
     else:
-        # there are outgoing pages, calculating distribution
-        random_factor = (1 - damping_factor) / dict_len
-        even_factor = damping_factor / pages_len
+        probability_distribution = {name: (1 - damping_factor) / len(corpus) for name in corpus.keys()}
+        for k in probability_distribution.keys():
+            if k in corpus[page]:
+                probability_distribution[k] += damping_factor / len(corpus[page])
 
-        for key in corpus.keys():
-            if key not in corpus[page]:
-                prop_dist[key] = random_factor
-            else:
-                prop_dist[key] = even_factor + random_factor
-
-    return prop_dist
+    return probability_distribution
 
 
 def sample_pagerank(corpus, damping_factor, n):
