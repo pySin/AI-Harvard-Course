@@ -83,17 +83,17 @@ def sample_pagerank(corpus, damping_factor, n):
     """
 
     page_ranks = {s: 0 for s in corpus}
-    sample = random.choice(list(corpus.keys()))
+    current_page = random.choice(list(corpus.keys()))
     n -= 1
 
     # collecting results through iteration
     for _ in range(n):
-        dist = transition_model(corpus, sample, damping_factor)
+        probability_distribution = transition_model(corpus, current_page, damping_factor)
         r_number = random.random()
         lower_range_v = 0
-        for key, value in dist.items():
+        for key, value in probability_distribution.items():
             if lower_range_v < r_number < lower_range_v + value:
-                sample = key
+                current_page = key
                 page_ranks[key] += 1
             lower_range_v += value
 
