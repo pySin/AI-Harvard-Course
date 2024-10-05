@@ -122,10 +122,10 @@ def iterate_pagerank(corpus, damping_factor):
     # for page in corpus:
     #     old_dict[page] = 1 / pages_number
 
-    # Set variable to keep states of page probabilities
+    # Set variable to track changes of page probabilities
     stable_ratings = False
 
-    # repeatedly calculating new rank values basing on all of the current rank values
+    # repeatedly calculating new rank values basing on current rank values
     while not stable_ratings:
         stable_ratings = True
         for page in corpus:
