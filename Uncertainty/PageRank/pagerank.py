@@ -82,7 +82,7 @@ def sample_pagerank(corpus, damping_factor, n):
     PageRank values should sum to 1.
     """
 
-    samples_dict = {s: 0 for s in corpus}
+    page_ranks = {s: 0 for s in corpus}
     sample = random.choice(list(corpus.keys()))
     n -= 1
 
@@ -94,14 +94,14 @@ def sample_pagerank(corpus, damping_factor, n):
         for key, value in dist.items():
             if lower_range_v < r_number < lower_range_v + value:
                 sample = key
-                samples_dict[key] += 1
+                page_ranks[key] += 1
             lower_range_v += value
 
     n += 1
-    for key, value in samples_dict.items():
-        samples_dict[key] = value / n
+    for key, value in page_ranks.items():
+        page_ranks[key] = value / n
 
-    return samples_dict
+    return page_ranks
 
 
 def iterate_pagerank(corpus, damping_factor):
@@ -114,15 +114,17 @@ def iterate_pagerank(corpus, damping_factor):
     PageRank values should sum to 1.
     """
     pages_number = len(corpus)
-    old_dict = {}
+    old_dict = {r: 1 / len(corpus) for r in corpus}
     new_dict = {}
 
     # assigning each page a rank of 1/n, where n is total number of pages in the corpus
-    for page in corpus:
-        old_dict[page] = 1 / pages_number
+    # for page in corpus:
+    #     old_dict[page] = 1 / pages_number
 
+    stable_ratings = False
     # repeatedly calculating new rank values basing on all of the current rank values
-    while True:
+    while not stable_ratings:
+        stable_ratings = True
         for page in corpus:
             temp = 0
             for linking_page in corpus:
@@ -142,6 +144,7 @@ def iterate_pagerank(corpus, damping_factor):
             break
         else:
             old_dict = new_dict.copy()
+            stable_ratings = False
 
     return old_dict
 
