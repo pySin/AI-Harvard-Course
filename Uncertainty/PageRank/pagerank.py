@@ -126,6 +126,7 @@ def iterate_pagerank(corpus, damping_factor):
     stable_ratings = False
 
     # repeatedly calculating new rank values basing on current rank values
+    # Reassign page ranks until criteria is met.
     while not stable_ratings:
         stable_ratings = True
         for page in corpus:
