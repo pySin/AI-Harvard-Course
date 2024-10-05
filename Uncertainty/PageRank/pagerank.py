@@ -84,8 +84,8 @@ def transition_model(corpus, page, damping_factor):
 
     # No link page scenario
     if len(corpus[page]) == 0:
-        probability_distribution = {probability_distribution[name]: 1 / len(corpus)
-                                    for name in corpus.keys()}
+        for key, value in corpus.items():
+            probability_distribution[key] = (1 - damping_factor) / len(corpus)
 
     # Links present in target page
     else:
