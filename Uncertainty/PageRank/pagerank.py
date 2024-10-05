@@ -13,12 +13,14 @@ def main():
     corpus = crawl(sys.argv[1])
     ranks = sample_pagerank(corpus, DAMPING, SAMPLES)
     print(f"PageRank Results from Sampling (n = {SAMPLES})")
+    print(f"Sample Corpus: {corpus}")
     for page in sorted(ranks):
         print(f"  {page}: {ranks[page]:.4f}")
     ranks = iterate_pagerank(corpus, DAMPING)
     print(f"PageRank Results from Iteration")
     for page in sorted(ranks):
         print(f"  {page}: {ranks[page]:.4f}")
+    # print(f"Corpus: {corpus}")
 
 
 def crawl(directory):
@@ -58,12 +60,14 @@ def transition_model(corpus, page, damping_factor):
     a link at random chosen from all pages in the corpus.
     """
     links = corpus[page]
-    print(links)
+    # return equal probabilities 15% of the time and distributed probabilities 85% of the time
+    num_generate_0_to_1 = random.random()
+    if num_generate_0_to_1 <= 0.15:
+        visit_probabilities = {x: 1 / len(corpus) for x in corpus}
+    else:
+        visit_probabilities = {x: 1 / len(links) for x in corpus}
+    # print(links)
     # visit_probabilities = {x: round((1 - damping_factor) / len(corpus), 3) for x in corpus}
-    visit_probabilities = {x: (1 - damping_factor) / len(corpus) for x in corpus}
-    visit_probabilities = {x: visit_probabilities[x] + (damping_factor / len(links))
-                           if x in links else visit_probabilities[x]
-                           for x in visit_probabilities}
     return visit_probabilities
 
 
@@ -111,10 +115,13 @@ def iterate_pagerank(corpus, damping_factor):
         stable_ratings = True
 
         for page_name, page_rank in page_ranks.items():
+            if not corpus[page_name]:
+                corpus[page_name] = set(page_ranks.keys())
             link_weight = damping_factor * (sum([page_ranks[lr] / len(corpus[lr]) for lr in corpus
                                                 if lr != page_name
                                                 and page_name in corpus[lr]]))
             new_page_rank = (1 - damping_factor / len(corpus)) + link_weight
+
             if not (page_rank - 0.001) < new_page_rank < (page_rank + 0.001):
                 stable_ratings = False
             page_ranks[page_name] = new_page_rank
