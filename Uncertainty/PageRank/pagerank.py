@@ -87,7 +87,7 @@ def sample_pagerank(corpus, damping_factor, n):
     n -= 1
 
     # collecting results through iteration
-    for _ in range(n):
+    for i in range(n):
         probability_distribution = transition_model(corpus, current_page, damping_factor)
         r_number = random.random()
         lower_range_v = 0
