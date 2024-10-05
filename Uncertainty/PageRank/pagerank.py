@@ -83,22 +83,19 @@ def sample_pagerank(corpus, damping_factor, n):
     """
 
     samples_dict = {s: 0 for s in corpus}
-    sample = None
+    sample = random.choice(list(corpus.keys()))
+    n -= 1
 
     # itearting n times
     for _ in range(n):
-        if sample:
-            # previous sample is available, choosing using transition model
-            dist = transition_model(corpus, sample, damping_factor)
-            dist_lst = list(dist.keys())
-            dist_weights = [dist[i] for i in dist]
-            sample = random.choices(dist_lst, dist_weights, k=1)[0]
-        else:
-            # no previous sample, choosing randomly
-            sample = random.choice(list(corpus.keys()))
-
-        # count each sample
-        samples_dict[sample] += 1
+        dist = transition_model(corpus, sample, damping_factor)
+        r_number = random.random()
+        lower_range_v = 0
+        for key, value in dist.items():
+            if lower_range_v < r_number < lower_range_v + value:
+                sample = key
+                samples_dict[key] += 1
+            lower_range_v += value
 
     # turn sample count to percentage
     for item in samples_dict:
