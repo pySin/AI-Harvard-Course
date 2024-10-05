@@ -86,7 +86,7 @@ def sample_pagerank(corpus, damping_factor, n):
     sample = random.choice(list(corpus.keys()))
     n -= 1
 
-    # itearting n times
+    # collecting results through iteration
     for _ in range(n):
         dist = transition_model(corpus, sample, damping_factor)
         r_number = random.random()
