@@ -13,14 +13,12 @@ def main():
     corpus = crawl(sys.argv[1])
     ranks = sample_pagerank(corpus, DAMPING, SAMPLES)
     print(f"PageRank Results from Sampling (n = {SAMPLES})")
-    print(f"Sample Corpus: {corpus}")
     for page in sorted(ranks):
         print(f"  {page}: {ranks[page]:.4f}")
     ranks = iterate_pagerank(corpus, DAMPING)
     print(f"PageRank Results from Iteration")
     for page in sorted(ranks):
         print(f"  {page}: {ranks[page]:.4f}")
-    # print(f"Corpus: {corpus}")
 
 
 def crawl(directory):
@@ -59,21 +57,30 @@ def transition_model(corpus, page, damping_factor):
     linked to by `page`. With probability `1 - damping_factor`, choose
     a link at random chosen from all pages in the corpus.
     """
-    links = corpus[page]
-    # return equal probabilities 15% of the time and distributed probabilities 85% of the time
-    num_generate_0_to_1 = random.random()
-    if len(links) == 0:
-        if num_generate_0_to_1 < 1 - damping_factor:
-            visit_probabilities = {x: 1 / len(corpus) for x in corpus}
-        else:
-            visit_probabilities = None
-    elif num_generate_0_to_1 <= 1 - damping_factor:
-        visit_probabilities = {x: 1 / len(corpus) for x in corpus}
+
+    prop_dist = {}
+
+    # check if page has outgoing links
+    dict_len = len(corpus.keys())
+    pages_len = len(corpus[page])
+
+    if len(corpus[page]) < 1:
+        # no outgoing pages, choosing randomly from all possible pages
+        for key in corpus.keys():
+            prop_dist[key] = 1 / dict_len
+
     else:
-        visit_probabilities = {x: 1 / len(links) for x in links}
-    # print(links)
-    # visit_probabilities = {x: round((1 - damping_factor) / len(corpus), 3) for x in corpus}
-    return visit_probabilities
+        # there are outgoing pages, calculating distribution
+        random_factor = (1 - damping_factor) / dict_len
+        even_factor = damping_factor / pages_len
+
+        for key in corpus.keys():
+            if key not in corpus[page]:
+                prop_dist[key] = random_factor
+            else:
+                prop_dist[key] = even_factor + random_factor
+
+    return prop_dist
 
 
 def sample_pagerank(corpus, damping_factor, n):
@@ -85,29 +92,33 @@ def sample_pagerank(corpus, damping_factor, n):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
-    current_page = random.choice([x for x in corpus])
-    page_visits = {x: 0 for x in corpus}
 
-    for i in range(n):
-        page_visit_chances = transition_model(corpus, current_page, damping_factor)
-        if not page_visit_chances:
-            continue
+    # prepare dictionary with number of samples == 0
+    samples_dict = corpus.copy()
+    for i in samples_dict:
+        samples_dict[i] = 0
+    sample = None
 
-        lower_range = 0
-        random_0_to_1 = random.random()
+    # itearting n times
+    for _ in range(n):
+        if sample:
+            # previous sample is available, choosing using transition model
+            dist = transition_model(corpus, sample, damping_factor)
+            dist_lst = list(dist.keys())
+            dist_weights = [dist[i] for i in dist]
+            sample = random.choices(dist_lst, dist_weights, k=1)[0]
+        else:
+            # no previous sample, choosing randomly
+            sample = random.choice(list(corpus.keys()))
 
-        for key, value in page_visit_chances.items():
-            if lower_range < random_0_to_1 < lower_range + value:
-                page_visits[key] += 1
-                current_page = key
-                break
-            else:
-                lower_range += value
+        # count each sample
+        samples_dict[sample] += 1
 
-        print(f"Page Visit Chances: {page_visit_chances}")
-    all_visits = sum([x for x in page_visits.values()])
-    page_ranks = {x: page_visits[x] / all_visits for x in page_visits}
-    return page_ranks
+    # turn sample count to percentage
+    for item in samples_dict:
+        samples_dict[item] /= n
+
+    return samples_dict
 
 
 def iterate_pagerank(corpus, damping_factor):
@@ -119,27 +130,37 @@ def iterate_pagerank(corpus, damping_factor):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
-    page_ranks = {r: 1 / len(corpus) for r in corpus}
-    stable_ratings = False
+    pages_number = len(corpus)
+    old_dict = {}
+    new_dict = {}
 
-    while not stable_ratings:
-        stable_ratings = True
+    # assigning each page a rank of 1/n, where n is total number of pages in the corpus
+    for page in corpus:
+        old_dict[page] = 1 / pages_number
 
-        for page_name, page_rank in page_ranks.items():
-            if not corpus[page_name]:
-                corpus[page_name] = set(page_ranks.keys())
-            link_weight = damping_factor * (sum([page_ranks[lr] / len(corpus[lr]) for lr in corpus
-                                                if lr != page_name
-                                                and page_name in corpus[lr]]))
-            new_page_rank = (1 - damping_factor / len(corpus)) + link_weight
+    # repeatedly calculating new rank values basing on all of the current rank values
+    while True:
+        for page in corpus:
+            temp = 0
+            for linking_page in corpus:
+                # check if page links to our page
+                if page in corpus[linking_page]:
+                    temp += (old_dict[linking_page] / len(corpus[linking_page]))
+                # if page has no links, interpret it as having one link for every other page
+                if len(corpus[linking_page]) == 0:
+                    temp += (old_dict[linking_page]) / len(corpus)
+            temp *= damping_factor
+            temp += (1 - damping_factor) / pages_number
 
-            if not (page_rank - 0.001) < new_page_rank < (page_rank + 0.001):
-                stable_ratings = False
-            page_ranks[page_name] = new_page_rank
+            new_dict[page] = temp
 
-    page_ranks_sum = sum([pr for pr in page_ranks.values()])
-    page_ranks = {pr: (page_ranks[pr] / page_ranks_sum) for pr in page_ranks}
-    return page_ranks
+        difference = max([abs(new_dict[x] - old_dict[x]) for x in old_dict])
+        if difference < 0.001:
+            break
+        else:
+            old_dict = new_dict.copy()
+
+    return old_dict
 
 
 if __name__ == "__main__":
