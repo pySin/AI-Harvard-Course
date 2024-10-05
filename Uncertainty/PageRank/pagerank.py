@@ -63,11 +63,14 @@ def transition_model(corpus, page, damping_factor):
     # return equal probabilities 15% of the time and distributed probabilities 85% of the time
     num_generate_0_to_1 = random.random()
     if len(links) == 0:
-        visit_probabilities = {x: 1 / len(corpus) for x in corpus}
+        if num_generate_0_to_1 < 1 - damping_factor:
+            visit_probabilities = {x: 1 / len(corpus) for x in corpus}
+        else:
+            visit_probabilities = None
     elif num_generate_0_to_1 <= 1 - damping_factor:
         visit_probabilities = {x: 1 / len(corpus) for x in corpus}
     else:
-        visit_probabilities = {x: 1 / len(links) for x in corpus}
+        visit_probabilities = {x: 1 / len(links) for x in links}
     # print(links)
     # visit_probabilities = {x: round((1 - damping_factor) / len(corpus), 3) for x in corpus}
     return visit_probabilities
@@ -87,6 +90,8 @@ def sample_pagerank(corpus, damping_factor, n):
 
     for i in range(n):
         page_visit_chances = transition_model(corpus, current_page, damping_factor)
+        if not page_visit_chances:
+            continue
 
         lower_range = 0
         random_0_to_1 = random.random()
@@ -99,7 +104,9 @@ def sample_pagerank(corpus, damping_factor, n):
             else:
                 lower_range += value
 
-    page_ranks = {x: page_visits[x] / n for x in page_visits}
+        print(f"Page Visit Chances: {page_visit_chances}")
+    all_visits = sum([x for x in page_visits.values()])
+    page_ranks = {x: page_visits[x] / all_visits for x in page_visits}
     return page_ranks
 
 
