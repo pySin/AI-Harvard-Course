@@ -114,6 +114,7 @@ def iterate_pagerank(corpus, damping_factor):
     PageRank values should sum to 1.
     """
     pages_number = len(corpus)
+    # Create an empty dictionary pages names
     old_dict = {r: 1 / len(corpus) for r in corpus}
     new_dict = {}
 
