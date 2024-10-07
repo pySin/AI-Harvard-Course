@@ -134,11 +134,16 @@ def iterate_pagerank(corpus, damping_factor):
             for page_link in corpus:
                 # check if page links to our page
                 if main_page in corpus[page_link]:
-                    current_page_rank += (old_dict[page_link] / len(corpus[page_link]))
+                    current_page_rank = current_page_rank + (damping_factor *
+                                                             (old_dict[page_link] / len(corpus[page_link])))
+                    # current_page_rank += (1 - damping_factor) / pages_number
                 # if page has no links, interpret it as having one link for every other page
                 if len(corpus[page_link]) == 0:
-                    current_page_rank += (old_dict[page_link]) / len(corpus)
-            current_page_rank *= damping_factor
+                    # current_page_rank = current_page_rank + (old_dict[page_link]) / len(corpus)
+                    current_page_rank = current_page_rank + \
+                                        (damping_factor * (old_dict[page_link]) / len(corpus))
+                    # current_page_rank += (1 - damping_factor) / pages_number
+            # current_page_rank *= damping_factor
             current_page_rank += (1 - damping_factor) / pages_number
 
             new_dict[main_page] = current_page_rank
