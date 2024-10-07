@@ -125,6 +125,7 @@ def iterate_pagerank(corpus, damping_factor):
     # Set variable to track changes of page probabilities
     stable_ratings = False
 
+
     # repeatedly calculating new rank values basing on current rank values
     # Reassign page ranks until criteria is met.
     while not stable_ratings:
@@ -145,16 +146,21 @@ def iterate_pagerank(corpus, damping_factor):
                     # current_page_rank += (1 - damping_factor) / pages_number
             # current_page_rank *= damping_factor
             current_page_rank += (1 - damping_factor) / pages_number
+            ranking_difference = abs(old_dict[main_page] - current_page_rank)
+            # print(ranking_difference)
+            if ranking_difference > 0.001:
+                stable_ratings = False
+            old_dict[main_page] = current_page_rank
 
-            new_dict[main_page] = current_page_rank
-
-        difference = max([abs(new_dict[x] - old_dict[x]) for x in old_dict])
-        if difference < 0.001:
-            # break
-            continue
-        else:
-            old_dict = new_dict.copy()
-            stable_ratings = False
+        #     new_dict[main_page] = current_page_rank
+        #
+        # difference = max([abs(new_dict[x] - old_dict[x]) for x in old_dict])
+        # if difference < 0.001:
+        #     # break
+        #     continue
+        # else:
+        #     old_dict = new_dict.copy()
+        #     stable_ratings = False
 
     return old_dict
 
