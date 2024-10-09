@@ -38,3 +38,4 @@ print(random_choice(corpus_1))
 print(random.random())
 
 print(sys.argv)
+print(f"Another check")
