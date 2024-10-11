@@ -47,24 +47,29 @@ def create_table(table_name):
 
 def create_insert_query(values_line):
     query = f"INSERT INTO asd_rna_seq.gen_human VALUES({values_line})"
-    print(query)
+    return query
 
 
 def insert_values():
     o_file = open(FILE_PATH, "r")
     first_line_omit = o_file.readline()
 
-    x = 0
+    # x = 0
     is_line = True
     while is_line:
         line = o_file.readline()
         if not line:
             is_line = False
-        if x == 5:
-            is_line = False
-        x += 1
+        # if x == 5:
+        #     is_line = False
+        # x += 1
 
-        create_insert_query(line)
+        query = create_insert_query(line)
+        conn = mysql.connector.connect(host='localhost', user='root',
+                                       password='dance')  # MySQL connection.
+        cursor = conn.cursor()
+        cursor.execute(query)
+        conn.commit()
 
 
 insert_values()
