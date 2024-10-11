@@ -5,24 +5,15 @@ FILE_PATH = r"C:\Users\1\Desktop\Bioinformatics\Autism Spectrum Disorder RNA-seq
 
 
 def read_first_line(file_path):
-    o_file = open(file_path, "r")
-    # just_line = first_line = o_file.readline()
-    # just_line_2 = second_line = o_file.readline()
-    # print(f"Juss Line 1: {just_line}")
-    # print(f"Juss Line 2: {just_line_2}")
-    first_line = o_file.readline().split(",")
-    second_line = o_file.readline().split(",")
-    print(first_line)
-    print(second_line)
-    for i in range(len(first_line)):
-        print(f"{first_line[i]} : {second_line[i]}")
+    with open(file_path, "r") as o_file:
+        first_line = o_file.readline().split(",")
     return first_line
 
 
-def create_table_sql_query(table_name: str, ):
+def create_table_sql_query(table_name: str):
 
     columns_with_datatypes = """
-                                #tax_id INT,
+                                tax_id INT,
                                 GeneID INT,
                                 Symbol VARCHAR(255),
                                 LocusTag VARCHAR(255),
@@ -40,11 +31,51 @@ def create_table_sql_query(table_name: str, ):
                                 Feature_type TEXT
                              """
 
-    query = f"CREATE TABLE IF NOT EXISTS {table_name} ()"
-
-# conn = mysql.connector.connect(host='localhost', user='root',
-#                                password='dance')  # MySQL connection.
-# cursor = conn.cursor()
+    query = f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_with_datatypes})"
+    return query
 
 
+def create_table(table_name):
+    query = create_table_sql_query(table_name)
+
+    conn = mysql.connector.connect(host='localhost', user='root',
+                                   password='dance')  # MySQL connection.
+    cursor = conn.cursor()
+    cursor.execute(query)
+    conn.commit()
+
+
+def create_insert_query(values_line):
+    query = f"INSERT INTO asd_rna_seq.gen_human VALUES({values_line})"
+    print(query)
+
+
+def insert_values():
+    o_file = open(FILE_PATH, "r")
+    first_line_omit = o_file.readline()
+
+    x = 0
+    is_line = True
+    while is_line:
+        line = o_file.readline()
+        if not line:
+            is_line = False
+        if x == 5:
+            is_line = False
+        x += 1
+
+        create_insert_query(line)
+
+
+insert_values()
 # read_first_line(FILE_PATH)
+# create_table("asd_rna_seq.gen_human")
+
+# op_file = open(FILE_PATH, "r")
+# l1 = op_file.readline().split(",")
+# l2 = op_file.readline().split(",")
+
+# print(l1)
+# print(l2)
+# print(len(l1))
+# print(len(l2))
