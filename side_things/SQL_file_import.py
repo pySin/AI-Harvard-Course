@@ -26,18 +26,18 @@ def create_table_sql_query(table_name: str, ):
                                 GeneID INT,
                                 Symbol VARCHAR(255),
                                 LocusTag VARCHAR(255),
-                                Synonyms VARCHAR(255),
-                                dbXrefs VARCHAR(255),
-                                chromosome VARCHAR(10),
-                                map_location VARCHAR(50),
-                                description VARCHAR(100),
-                                type_of_gene VARCHAR(255),
-                                Symbol_from_nomenclature_authority VARCHAR(255),
-                                Full_name_from_nomenclature_authority VARCHAR(255),
-                                Nomenclature_status VARCHAR(20),
-                                Other_designations VARCHAR(255),
-                                Modification_date VARCHAR(55),
-                                Feature_type VARCHAR(66)
+                                Synonyms TEXT,
+                                dbXrefs TEXT,
+                                chromosome TEXT,
+                                map_location TEXT,
+                                description TEXT,
+                                type_of_gene TEXT,
+                                Symbol_from_nomenclature_authority TEXT,
+                                Full_name_from_nomenclature_authority TEXT,
+                                Nomenclature_status TEXT,
+                                Other_designations TEXT,
+                                Modification_date TEXT,
+                                Feature_type TEXT
                              """
 
     query = f"CREATE TABLE IF NOT EXISTS {table_name} ()"
@@ -47,4 +47,4 @@ def create_table_sql_query(table_name: str, ):
 # cursor = conn.cursor()
 
 
-read_first_line(FILE_PATH)
+# read_first_line(FILE_PATH)
