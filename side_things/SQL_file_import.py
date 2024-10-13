@@ -50,6 +50,7 @@ def create_insert_query(values_line):
     return query
 
 
+#  Add values to Database table
 def insert_values():
     o_file = open(FILE_PATH, "r")
     first_line_omit = o_file.readline()
