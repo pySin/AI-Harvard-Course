@@ -139,6 +139,22 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         * everyone in set `have_trait` has the trait, and
         * everyone not in set` have_trait` does not have the trait.
     """
+    # probability = 1  # CT
+
+    # print(f"People check: {people}")
+    for person in people:
+        # Get number of mutated genes
+        gene_number = 0  # CTN
+        if person in one_gene:
+            gene_number = 1
+        elif person in two_genes:
+            gene_number = 2
+
+        # Get if person exhibits blindness
+        trait = False  # CTN
+        if person in have_trait:
+            trait = True
+
     raise NotImplementedError
 
 
