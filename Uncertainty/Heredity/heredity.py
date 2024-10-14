@@ -155,6 +155,12 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         if person in have_trait:
             trait = True
 
+        # gene_numb_prop = PROBS['gene'][gene_number]  # Don't
+        # trait_prop = PROBS['trait'][gene_number][trait]  # Don't list direct
+
+
+
+
     raise NotImplementedError
 
 
