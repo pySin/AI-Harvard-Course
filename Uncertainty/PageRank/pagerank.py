@@ -13,12 +13,14 @@ def main():
     corpus = crawl(sys.argv[1])
     ranks = sample_pagerank(corpus, DAMPING, SAMPLES)
     print(f"PageRank Results from Sampling (n = {SAMPLES})")
+    print(f"Sample Corpus: {corpus}")
     for page in sorted(ranks):
         print(f"  {page}: {ranks[page]:.4f}")
     ranks = iterate_pagerank(corpus, DAMPING)
     print(f"PageRank Results from Iteration")
     for page in sorted(ranks):
         print(f"  {page}: {ranks[page]:.4f}")
+    # print(f"Corpus: {corpus}")
 
 
 def crawl(directory):
@@ -60,7 +62,8 @@ def transition_model(corpus, page, damping_factor):
 
     # No link page scenario
     if len(corpus[page]) == 0:
-        probability_distribution = {key: 1 / len(corpus.keys()) for key in corpus.keys()}
+        probability_distribution = {name: 1 / len(corpus)
+                                    for name in corpus.keys()}
 
     # Links present in target page
     else:
@@ -68,7 +71,6 @@ def transition_model(corpus, page, damping_factor):
         for k in probability_distribution.keys():
             if k in corpus[page]:
                 probability_distribution[k] += damping_factor / len(corpus[page])
-
     return probability_distribution
 
 
@@ -81,26 +83,27 @@ def sample_pagerank(corpus, damping_factor, n):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
+    current_page = random.choice([x for x in corpus])
+    page_visits = {x: 0 for x in corpus}
 
-    page_ranks = {s: 0 for s in corpus}
-    current_page = random.choice(list(corpus.keys()))
-    n -= 1
-
-    # collecting results through iteration
     for i in range(n):
-        probability_distribution = transition_model(corpus, current_page, damping_factor)
-        r_number = random.random()
-        lower_range_v = 0
-        for key, value in probability_distribution.items():
-            if lower_range_v < r_number < lower_range_v + value:
+        page_visit_chances = transition_model(corpus, current_page, damping_factor)
+        if not page_visit_chances:
+            continue
+
+        lower_range = 0
+        random_0_to_1 = random.random()
+
+        for key, value in page_visit_chances.items():
+            if lower_range < random_0_to_1 < lower_range + value:
+                page_visits[key] += 1
                 current_page = key
-                page_ranks[key] += 1
-            lower_range_v += value
+                break
+            else:
+                lower_range += value
 
-    n += 1
-    for key, value in page_ranks.items():
-        page_ranks[key] = value / n
-
+    all_visits = sum([x for x in page_visits.values()])
+    page_ranks = {x: page_visits[x] / all_visits for x in page_visits}
     return page_ranks
 
 
@@ -113,33 +116,27 @@ def iterate_pagerank(corpus, damping_factor):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
-    pages_number = len(corpus)
-    # Create an empty dictionary pages names
-    old_dict = {r: 1 / len(corpus) for r in corpus}
-
-    # Set variable to track changes of page probabilities
+    page_ranks = {r: 1 / len(corpus) for r in corpus}
     stable_ratings = False
 
-    # Reassign page ranks until criteria is met.
     while not stable_ratings:
         stable_ratings = True
-        for main_page in corpus:
-            current_page_rank = 0
-            for page_link in corpus:
-                # check if page links to our page
-                if main_page in corpus[page_link]:
-                    current_page_rank = current_page_rank + (damping_factor *
-                                                             (old_dict[page_link] / len(corpus[page_link])))
-                if len(corpus[page_link]) == 0:
-                    current_page_rank = current_page_rank + \
-                                        (damping_factor * (old_dict[page_link]) / len(corpus))
-            current_page_rank += (1 - damping_factor) / pages_number
-            ranking_difference = abs(old_dict[main_page] - current_page_rank)
-            if ranking_difference > 0.001:
-                stable_ratings = False
-            old_dict[main_page] = current_page_rank
 
-    return old_dict
+        for page_name, page_rank in page_ranks.items():
+            if not corpus[page_name]:
+                corpus[page_name] = set(page_ranks.keys())
+            link_weight = damping_factor * (sum([page_ranks[lr] / len(corpus[lr]) for lr in corpus
+                                                if lr != page_name
+                                                and page_name in corpus[lr]]))
+            new_page_rank = (1 - damping_factor / len(corpus)) + link_weight
+
+            if not (page_rank - 0.001) < new_page_rank < (page_rank + 0.001):
+                stable_ratings = False
+            page_ranks[page_name] = new_page_rank
+
+    page_ranks_sum = sum([pr for pr in page_ranks.values()])
+    page_ranks = {pr: (page_ranks[pr] / page_ranks_sum) for pr in page_ranks}
+    return page_ranks
 
 
 if __name__ == "__main__":
