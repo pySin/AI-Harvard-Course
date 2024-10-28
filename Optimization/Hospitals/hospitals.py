@@ -133,3 +133,11 @@ class Space():
                 neighbors.append((r, c))
         return neighbors
 
+    def output_image(self, filename):
+        """Generates image with all houses and hospitals."""
+        from PIL import Image, ImageDraw, ImageFont
+        cell_size = 100
+        cell_border = 2
+        cost_size = 40
+        padding = 10
+
