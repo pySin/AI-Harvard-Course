@@ -11,4 +11,9 @@ class Space():
         self.houses = set()
         self.hospitals = set()
 
+    def add_house(self, row, col):
+        """Add a house at a particular location in state space."""
+        self.houses.add((row, col))
 
+    def available_spaces(self):
+        """Returns all cells not currently used by a house or hospital."""
