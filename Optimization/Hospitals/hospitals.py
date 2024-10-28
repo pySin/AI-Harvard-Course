@@ -84,3 +84,25 @@ class Space():
             if image_prefix:
                 self.output_image(f"{image_prefix}{str(count).zfill(3)}.png")
 
+    def random_restart(self, maximum, image_prefix=None, log=False):
+        """Repeats hill-climbing multiple times."""
+        best_hospitals = None
+        best_cost = None
+
+        # Repeat hill-climbing a fixed number of times
+        for i in range(maximum):
+            hospitals = self.hill_climb()
+            cost = self.get_cost(hospitals)
+            if best_cost is None or cost < best_cost:
+                best_cost = cost
+                best_hospitals = hospitals
+                if log:
+                    print(f"{i}: Found new best state: cost {cost}")
+            else:
+                if log:
+                    print(f"{i}: Found state: cost {cost}")
+
+            if image_prefix:
+                self.output_image(f"{image_prefix}{str(i).zfill(3)}.png")
+
+        return best_hospitals
