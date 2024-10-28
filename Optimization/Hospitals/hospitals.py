@@ -141,3 +141,18 @@ class Space():
         cost_size = 40
         padding = 10
 
+        # Create a blank canvas
+        img = Image.new(
+            "RGBA",
+            (self.width * cell_size,
+             self.height * cell_size + cost_size + padding * 2),
+            "white"
+        )
+        house = Image.open("assets/images/House.png").resize(
+            (cell_size, cell_size)
+        )
+        hospital = Image.open("assets/images/Hospital.png").resize(
+            (cell_size, cell_size)
+        )
+        font = ImageFont.truetype("assets/fonts/OpenSans-Regular.ttf", 30)
+        draw = ImageDraw.Draw(img)
