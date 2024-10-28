@@ -17,3 +17,17 @@ class Space():
 
     def available_spaces(self):
         """Returns all cells not currently used by a house or hospital."""
+
+        # Consider all possible cells
+        candidates = set(
+            (row, col)
+            for row in range(self.height)
+            for col in range(self.width)
+        )
+
+        # Remove all houses and hospitals
+        for house in self.houses:
+            candidates.remove(house)
+        for hospital in self.hospitals:
+            candidates.remove(hospital)
+        return candidates
