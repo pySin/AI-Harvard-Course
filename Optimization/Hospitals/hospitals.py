@@ -116,3 +116,20 @@ class Space():
                 for hospital in hospitals
             )
         return cost
+
+    def get_neighbors(self, row, col):
+        """Returns neighbors not already containing a house or hospital."""
+        candidates = [
+            (row - 1, col),
+            (row + 1, col),
+            (row, col - 1),
+            (row, col + 1)
+        ]
+        neighbors = []
+        for r, c in candidates:
+            if (r, c) in self.houses or (r, c) in self.hospitals:
+                continue
+            if 0 <= r < self.height and 0 <= c < self.width:
+                neighbors.append((r, c))
+        return neighbors
+
