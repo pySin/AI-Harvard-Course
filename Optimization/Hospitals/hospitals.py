@@ -45,5 +45,30 @@ class Space():
         if image_prefix:
             self.output_image(f"{image_prefix}{str(count).zfill(3)}.png")
 
+        # Continue until we reach maximum number of iterations
+        while maximum is None or count < maximum:
+            count += 1
+            best_neighbors = []
+            best_neighbor_cost = None
+
+            # Consider all hospitals to move
+            for hospital in self.hospitals:
+
+                # Consider all neighbors for that hospital
+                for replacement in self.get_neighbors(*hospital):
+
+                    # Generate a neighboring set of hospitals
+                    neighbor = self.hospitals.copy()
+                    neighbor.remove(hospital)
+                    neighbor.add(replacement)
+
+                    # Check if neighbor is best so far
+                    cost = self.get_cost(neighbor)
+                    if best_neighbor_cost is None or cost < best_neighbor_cost:
+                        best_neighbor_cost = cost
+                        best_neighbors = [neighbor]
+                    elif best_neighbor_cost == cost:
+                        best_neighbors.append(neighbor)
+
 
 
