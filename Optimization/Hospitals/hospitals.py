@@ -156,3 +156,35 @@ class Space():
         )
         font = ImageFont.truetype("assets/fonts/OpenSans-Regular.ttf", 30)
         draw = ImageDraw.Draw(img)
+
+        for i in range(self.height):
+            for j in range(self.width):
+
+                # Draw cell
+                rect = [
+                    (j * cell_size + cell_border,
+                     i * cell_size + cell_border),
+                    ((j + 1) * cell_size - cell_border,
+                     (i + 1) * cell_size - cell_border)
+                ]
+                draw.rectangle(rect, fill="black")
+
+                if (i, j) in self.houses:
+                    img.paste(house, rect[0], house)
+                if (i, j) in self.hospitals:
+                    img.paste(hospital, rect[0], hospital)
+
+        # Add cost
+        draw.rectangle(
+            (0, self.height * cell_size, self.width * cell_size,
+             self.height * cell_size + cost_size + padding * 2),
+            "black"
+        )
+        draw.text(
+            (padding, self.height * cell_size + padding),
+            f"Cost: {self.get_cost(self.hospitals)}",
+            fill="white",
+            font=font
+        )
+
+        img.save(filename)
