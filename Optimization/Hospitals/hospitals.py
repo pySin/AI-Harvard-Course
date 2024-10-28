@@ -70,5 +70,17 @@ class Space():
                     elif best_neighbor_cost == cost:
                         best_neighbors.append(neighbor)
 
+            # None of the neighbors are better than the current state
+            if best_neighbor_cost >= self.get_cost(self.hospitals):
+                return self.hospitals
 
+            # Move to a highest-valued neighbor
+            else:
+                if log:
+                    print(f"Found better neighbor: cost {best_neighbor_cost}")
+                self.hospitals = random.choice(best_neighbors)
+
+            # Generate image
+            if image_prefix:
+                self.output_image(f"{image_prefix}{str(count).zfill(3)}.png")
 
