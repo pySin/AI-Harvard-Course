@@ -11,3 +11,8 @@ result = scipy.optimize.linprog(
 )
 
 
+if result.success:
+    print(f"X1: {round(result.x[0], 2)} hours")
+    print(f"X2: {round(result.x[1], 2)} hours")
+else:
+    print("No solution")
