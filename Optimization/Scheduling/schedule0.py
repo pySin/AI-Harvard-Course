@@ -31,3 +31,31 @@ def backtrack(assignment):
             if result is not None:
                 return result
     return None
+
+
+def select_unassigned_variable(assignment):
+    """Chooses a variable not yet assigned, in order."""
+    for variable in VARIABLES:
+        if variable not in assignment:
+            return variable
+    return None
+
+
+def consistent(assignment):
+    """Checks to see if an assignment is consistent."""
+    for (x, y) in CONSTRAINTS:
+
+        # Only consider arcs where both are assigned
+        if x not in assignment or y not in assignment:
+            continue
+
+        # If both have same value, then not consistent
+        if assignment[x] == assignment[y]:
+            return False
+
+    # If nothing inconsistent, then assignment is consistent
+    return True
+
+
+solution = backtrack(dict())
+print(solution)
