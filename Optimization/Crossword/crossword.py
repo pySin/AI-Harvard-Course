@@ -16,3 +16,14 @@ class Variable():
                  self.j + (k if self.direction == Variable.ACROSS else 0))
             )
 
+    def __hash__(self):
+        return hash((self.i, self.j, self.direction, self.length))
+
+    def __eq__(self, other):
+        return (
+            (self.i == other.i) and
+            (self.j == other.j) and
+            (self.direction == other.direction) and
+            (self.length == other.length)
+        )
+
