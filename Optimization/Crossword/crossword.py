@@ -131,4 +131,3 @@ class Crossword():
             v for v in self.variables
             if v != var and self.overlaps[v, var]
         )
-
