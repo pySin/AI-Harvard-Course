@@ -224,7 +224,33 @@ class CrosswordCreator():
         The first value in the list, for example, should be the one
         that rules out the fewest values among the neighbors of `var`.
         """
-        raise NotImplementedError
+        # make temporary dict for holding values
+        word_dict = {}
+
+        # getting neighbours of var
+        neighbours = self.crossword.neighbors(var)
+
+        # iterating through var's words
+        for word in self.domains[var]:
+            eliminated = 0
+            for neighbour in neighbours:
+                # don't count if neighbor has already assigned value
+                if neighbour in assignment:
+                    continue
+                else:
+                    # calculate overlap between two variables
+                    xoverlap, yoverlap = self.crossword.overlaps[var, neighbour]
+                    for neighbour_word in self.domains[neighbour]:
+                        # iterate through neighbour's words, check for eliminate ones
+                        if word[xoverlap] != neighbour_word[yoverlap]:
+                            eliminated += 1
+            # add eliminated neighbour's words to temporary dict
+            word_dict[word] = eliminated
+
+        # sort variables dictionary by number of eliminated neighbour values
+        sorted_dict = {k: v for k, v in sorted(word_dict.items(), key=lambda item: item[1])}
+
+        return [*sorted_dict]
 
     def select_unassigned_variable(self, assignment):
         """
