@@ -44,3 +44,15 @@ class Crossword():
             contents = f.read().splitlines()
             self.height = len(contents)
             self.width = max(len(line) for line in contents)
+
+            self.structure = []
+            for i in range(self.height):
+                row = []
+                for j in range(self.width):
+                    if j >= len(contents[i]):
+                        row.append(False)
+                    elif contents[i][j] == "_":
+                        row.append(True)
+                    else:
+                        row.append(False)
+                self.structure.append(row)
