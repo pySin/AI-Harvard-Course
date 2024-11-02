@@ -260,7 +260,21 @@ class CrosswordCreator():
         degree. If there is a tie, any of the tied variables are acceptable
         return values.
         """
-        raise NotImplementedError
+
+        choice_dict = {}
+
+        # iterating through variables in domains
+        for variable in self.domains:
+            # iterating through variables in assignment
+            if variable not in assignment:
+                # if variable is not yet in assigment, add it to temp dict
+                choice_dict[variable] = self.domains[variable]
+
+        # make list of variables sorted by number of remaining values
+        sorted_list = [v for v, k in sorted(choice_dict.items(), key=lambda item:len(item[1]))]
+
+        # return variable with the minimum number of remaining values
+        return sorted_list[0]
 
     def backtrack(self, assignment):
         """
