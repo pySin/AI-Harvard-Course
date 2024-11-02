@@ -34,3 +34,13 @@ class Variable():
         direction = repr(self.direction)
         return f"Variable({self.i}, {self.j}, {direction}, {self.length})"
 
+
+class Crossword():
+
+    def __init__(self, structure_file, words_file):
+
+        # Determine structure of crossword
+        with open(structure_file) as f:
+            contents = f.read().splitlines()
+            self.height = len(contents)
+            self.width = max(len(line) for line in contents)
