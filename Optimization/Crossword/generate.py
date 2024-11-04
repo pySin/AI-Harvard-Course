@@ -138,18 +138,11 @@ class CrosswordCreator():
         # for xword in domains_copy[x]:
         for x_domain_member in copy.deepcopy(self.domains[x]):
             self.domains[x].remove(x_domain_member)
-            matched_value = False
             # iterate through words in y's domain
             for y_domain_member in self.domains[y]:
-                # if x's word and y's word have same letter in overlapping position
                 if x_domain_member[x_ovp_index] == y_domain_member[y_ovp_index]:
                     self.domains[x].add(x_domain_member)
-                    matched_value = True
-                    break  # no need to check rest of y's words for that x
-            if x_domain_member in self.domains[x]:
-                continue  # if x and y was matched, proceed with another x
-            # else:
-            #     self.domains[x].remove(x_domain_member)  # no matching y's word to x, removing word from domain
+                    break
 
         # return boolean if revision was made
         return domain_x_start != len(self.domains[x])
