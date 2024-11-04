@@ -121,10 +121,13 @@ class CrosswordCreator():
 
         # getting x and y ovelapping cells, unpack cords to variables
         # we have only overlaps in here, the question is if the overlapping letter is the same?
-        xoverlap, yoverlap = self.crossword.overlaps[x, y]
+        # xoverlap, yoverlap = self.crossword.overlaps[x, y]
+        x_ovp_index = self.crossword.overlaps[x, y][0]
+        y_ovp_index = self.crossword.overlaps[x, y][1]
 
         # make variable describing if revision was made
-        revision_made = False
+        # revision_made = False
+        domain_x_start = len(self.domains[x])
 
         # making domains copy
         domains_copy = copy.deepcopy(self.domains)
@@ -138,7 +141,7 @@ class CrosswordCreator():
                 # iterate through words in y's domain
                 for yword in self.domains[y]:
                     # if x's word and y's word have same letter in overlapping position
-                    if xword[xoverlap] == yword[yoverlap]:
+                    if xword[x_ovp_index] == yword[y_ovp_index]:
                         matched_value = True
                         break   # no need to check rest of y's words for that x
                 if matched_value:
@@ -148,7 +151,7 @@ class CrosswordCreator():
                     revision_made = True
 
         # return boolean if revision was made
-        return revision_made
+        return domain_x_start != len(self.domains[x])
 
     def ac3(self, arcs=None):
         """
