@@ -128,14 +128,6 @@ class CrosswordCreator():
         # make variable describing if revision was made
         domain_x_start = len(self.domains[x])
 
-        # making domains copy
-        # domains_copy = copy.deepcopy(self.domains)
-
-        # if overlap occurs
-        # if xoverlap:
-        # if True:
-        # iterate through words in x's domain
-        # for xword in domains_copy[x]:
         for x_domain_member in copy.deepcopy(self.domains[x]):
             self.domains[x].remove(x_domain_member)
             # iterate through words in y's domain
