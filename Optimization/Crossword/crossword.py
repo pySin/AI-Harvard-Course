@@ -124,6 +124,7 @@ class Crossword():
                         cells1.index(intersection),
                         cells2.index(intersection)
                     )
+        # print(self.overlaps)
 
     def neighbors(self, var):
         """Given a variable, return set of overlapping variables."""

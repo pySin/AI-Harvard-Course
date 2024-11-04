@@ -107,8 +107,6 @@ class CrosswordCreator():
             current_words = copy.deepcopy(self.domains[var])
             for w in current_words:
                 if len(w) != length:
-                    # if length of the word doesn't fit variable, delete it from
-                    # the original domain (not copy)
                     self.domains[var].remove(w)
 
     def revise(self, x, y):
@@ -120,7 +118,9 @@ class CrosswordCreator():
         Return True if a revision was made to the domain of `x`; return
         False if no revision was made.
         """
+
         # getting x and y ovelapping cells, unpack cords to variables
+        # we have only overlaps in here, the question is if the overlapping letter is the same?
         xoverlap, yoverlap = self.crossword.overlaps[x, y]
 
         # make variable describing if revision was made
@@ -130,7 +130,8 @@ class CrosswordCreator():
         domains_copy = copy.deepcopy(self.domains)
 
         # if overlap occurs
-        if xoverlap:
+        # if xoverlap:
+        if True:
             # iterate through words in x's domain
             for xword in domains_copy[x]:
                 matched_value = False
@@ -176,7 +177,6 @@ class CrosswordCreator():
                     if neighbour != y:
                         queue.append((neighbour, x))
             return True
-        raise NotImplementedError
 
     def assignment_complete(self, assignment):
         """
