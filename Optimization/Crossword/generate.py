@@ -112,7 +112,6 @@ class CrosswordCreator():
                     # if length of the word doesn't fit variable, delete it from
                     # the original domain (not copy)
                     self.domains[variable].remove(word)
-        # raise NotImplementedError
 
     def revise(self, x, y):
         """
