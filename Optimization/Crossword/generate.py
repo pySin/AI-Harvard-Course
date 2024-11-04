@@ -103,11 +103,12 @@ class CrosswordCreator():
         domain_copy = copy.deepcopy(self.domains)
 
         # iterate through domains copy
-        for variable in domain_copy:
+        # for variable in domain_copy:
+        for variable in self.domains:
             # getting the variable length
             length = variable.length
             # iterate through words in domain
-            for word in domain_copy[variable]:
+            for word in self.domains[variable]:
                 if len(word) != length:
                     # if length of the word doesn't fit variable, delete it from
                     # the original domain (not copy)
