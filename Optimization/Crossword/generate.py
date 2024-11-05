@@ -119,13 +119,9 @@ class CrosswordCreator():
         False if no revision was made.
         """
 
-        # getting x and y ovelapping cells, unpack cords to variables
-        # we have only overlaps in here, the question is if the overlapping letter is the same?
-        # xoverlap, yoverlap = self.crossword.overlaps[x, y]
         x_ovp_index = self.crossword.overlaps[x, y][0]
         y_ovp_index = self.crossword.overlaps[x, y][1]
 
-        # make variable describing if revision was made
         domain_x_start = len(self.domains[x])
 
         for x_domain_member in copy.deepcopy(self.domains[x]):
