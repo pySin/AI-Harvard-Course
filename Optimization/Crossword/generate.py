@@ -161,8 +161,8 @@ class CrosswordCreator():
         crossword variable); return False otherwise.
         """
 
-        for variable in self.domains:
-            if variable not in assignment:
+        for found_word in self.domains:
+            if found_word not in assignment:
                 return False
         return True
 
