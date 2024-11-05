@@ -146,21 +146,21 @@ class CrosswordCreator():
         """
         if not arcs:
             # no arcs provided, start with an initial queue of all of the arcs in the problem
-            queue = []
+            arcs = []
             # populating queue
             for variable1 in self.domains:
                 for variable2 in self.crossword.neighbors(variable1):
                     if self.crossword.overlaps[variable1, variable2] is not None:
-                        queue.append((variable1, variable2))
+                        arcs.append((variable1, variable2))
 
-        while len(queue) > 0:
-            x, y = queue.pop(0)
+        while len(arcs) > 0:
+            x, y = arcs.pop(0)
             if self.revise(x, y):
                 if len(self.domains[x]) == 0:
                     return False
                 for neighbour in self.crossword.neighbors(x):
                     if neighbour != y:
-                        queue.append((neighbour, x))
+                        arcs.append((neighbour, x))
             return True
 
     def assignment_complete(self, assignment):
