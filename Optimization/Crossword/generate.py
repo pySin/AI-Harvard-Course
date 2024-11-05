@@ -172,8 +172,9 @@ class CrosswordCreator():
         puzzle without conflicting characters); return False otherwise.
         """
         # check if all values are distinct
-        words = [*assignment.values()]
-        if len(words) != len(set(words)):
+        # words = [*assignment.values()]
+        # if len(words) != len(set(words)):
+        if len(assignment) != len(set(assignment.values())):
             return False
 
         # check if every value is the correct length
