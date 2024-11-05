@@ -145,10 +145,10 @@ class CrosswordCreator():
         return False if one or more domains end up empty.
         """
         if not arcs:
-            # no arcs provided, start with an initial queue of all of the arcs in the problem
+            # add overlapping cells if not given
             arcs = []
-            # populating queue
             for v1_domain in self.domains:
+                # use the neighbours function to find all words overlapping with other words
                 current_neighbours = self.crossword.neighbors(v1_domain)
                 for neighbour in current_neighbours:
                     arcs.append((v1_domain, neighbour))
