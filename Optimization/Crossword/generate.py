@@ -183,33 +183,53 @@ class CrosswordCreator():
         The first value in the list, for example, should be the one
         that rules out the fewest values among the neighbors of `var`.
         """
-        # make temporary dict for holding values
-        word_dict = {}
+        # values = assignment[var]
+        # print(f"Values: {values}")
+        # print(f"VAR: {var}")
+        # print(f"Assignment: {assignment}")
+        # print(f"Domains {self.domains}")
+        # return None
+        # # make temporary dict for holding values
 
-        # getting neighbours of var
+        ruled_out_dict = {}
+        #
+        # # getting neighbours of var
         neighbours = self.crossword.neighbors(var)
-
-        # iterating through var's words
-        for word in self.domains[var]:
-            eliminated = 0
-            for neighbour in neighbours:
-                # don't count if neighbor has already assigned value
-                if neighbour in assignment:
-                    continue
-                else:
-                    # calculate overlap between two variables
-                    xoverlap, yoverlap = self.crossword.overlaps[var, neighbour]
-                    for neighbour_word in self.domains[neighbour]:
-                        # iterate through neighbour's words, check for eliminate ones
-                        if word[xoverlap] != neighbour_word[yoverlap]:
-                            eliminated += 1
-            # add eliminated neighbour's words to temporary dict
-            word_dict[word] = eliminated
-
-        # sort variables dictionary by number of eliminated neighbour values
-        sorted_dict = {k: v for k, v in sorted(word_dict.items(), key=lambda item: item[1])}
-
-        return [*sorted_dict]
+        # neighbour_word_values = [assignment[n] for n in neighbours]
+        # print(neighbour_word_values)
+        # print(neighbours)
+        for neighbour in neighbours:
+            sub_neighbours = self.crossword.neighbors(neighbour)
+            ruled_out_dict[neighbour] = len(sub_neighbours)
+            # print(f"Sub-neighbours: {sub_neighbours}")
+        ordered_rod = sorted(ruled_out_dict, key=lambda x: ruled_out_dict[x], reverse=True)
+        words_order = [assignment[v] for v in ordered_rod]
+        # print(f"Ruled Out Dict: {ruled_out_dict}")
+        # print(f"Ordered_ROD: {ordered_rod}")
+        # print(f"Words Order: {words_order}")
+        #
+        # # iterating through var's words
+        # for word in self.domains[var]:
+        #     eliminated = 0
+        #     for neighbour in neighbours:
+        #         # don't count if neighbor has already assigned value
+        #         if neighbour in assignment:
+        #             continue
+        #         else:
+        #             # calculate overlap between two variables
+        #             xoverlap, yoverlap = self.crossword.overlaps[var, neighbour]
+        #             for neighbour_word in self.domains[neighbour]:
+        #                 # iterate through neighbour's words, check for eliminate ones
+        #                 if word[xoverlap] != neighbour_word[yoverlap]:
+        #                     eliminated += 1
+        #     # add eliminated neighbour's words to temporary dict
+        #     word_dict[word] = eliminated
+        #
+        # # sort variables dictionary by number of eliminated neighbour values
+        # sorted_dict = {k: v for k, v in sorted(word_dict.items(), key=lambda item: item[1])}
+        #
+        # return [*sorted_dict]
+        return words_order
 
     def select_unassigned_variable(self, assignment):
         """
@@ -220,20 +240,20 @@ class CrosswordCreator():
         return values.
         """
 
-        choice_dict = {}
+        # choice_dict = {}
+        min_var = None
 
         # iterating through variables in domains
         for variable in self.domains:
             # iterating through variables in assignment
             if variable not in assignment:
-                # if variable is not yet in assigment, add it to temp dict
-                choice_dict[variable] = self.domains[variable]
+                if min_var is None:
+                    min_var = variable
 
-        # make list of variables sorted by number of remaining values
-        sorted_list = [v for v, k in sorted(choice_dict.items(), key=lambda item:len(item[1]))]
+                if len(self.domains[variable]) < len(self.domains[min_var]):
+                    min_var = variable
 
-        # return variable with the minimum number of remaining values
-        return sorted_list[0]
+        return min_var  # sorted_list[0]
 
     def backtrack(self, assignment):
         """
@@ -260,6 +280,7 @@ class CrosswordCreator():
             if self.consistent(assignment_copy):
                 result = self.backtrack(assignment_copy)
                 if result is not None:
+                    # self.order_domain_values(variable, assignment_copy)  # my line
                     return result
         return None
 
