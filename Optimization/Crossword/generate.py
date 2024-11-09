@@ -264,7 +264,7 @@ class CrosswordCreator():
 
         If no assignment is possible, return None.
         """
-        # if assignment is already ready
+        # check if assignment is completed
         if len(assignment) == len(self.domains):
             return assignment
 
