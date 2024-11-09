@@ -132,7 +132,7 @@ class CrosswordCreator():
                     self.domains[x].add(x_domain_member)
                     break
 
-        # return boolean if revision was made
+        # True id there was revision
         return domain_x_start != len(self.domains[x])
 
     def ac3(self, arcs=None):
@@ -148,7 +148,7 @@ class CrosswordCreator():
             # add overlapping cells if not given
             arcs = []
             for v1_domain in self.domains:
-                # use the neighbours function to find all words overlapping with other words
+                # find overlapping words
                 current_neighbours = self.crossword.neighbors(v1_domain)
                 for neighbour in current_neighbours:
                     arcs.append((v1_domain, neighbour))
@@ -171,9 +171,19 @@ class CrosswordCreator():
         puzzle without conflicting characters); return False otherwise.
         """
 
+        # word-length check
         if len(assignment) != len(set(assignment.values())):
             return False
 
+        # cross-sections check
+        for var_item in assignment:
+            for neighbour in self.crossword.neighbors(var_item):
+                if neighbour in assignment:
+                    row, col = self.crossword.overlaps[var_item, neighbour]
+                    if assignment[var_item][row] != assignment[neighbour][col]:
+                        return False
+
+        # check successful
         return True
 
     def order_domain_values(self, var, assignment):
@@ -183,52 +193,18 @@ class CrosswordCreator():
         The first value in the list, for example, should be the one
         that rules out the fewest values among the neighbors of `var`.
         """
-        # values = assignment[var]
-        # print(f"Values: {values}")
-        # print(f"VAR: {var}")
-        # print(f"Assignment: {assignment}")
-        # print(f"Domains {self.domains}")
-        # return None
-        # # make temporary dict for holding values
 
         ruled_out_dict = {}
-        #
-        # # getting neighbours of var
+
         neighbours = self.crossword.neighbors(var)
-        # neighbour_word_values = [assignment[n] for n in neighbours]
-        # print(neighbour_word_values)
-        # print(neighbours)
+
         for neighbour in neighbours:
             sub_neighbours = self.crossword.neighbors(neighbour)
             ruled_out_dict[neighbour] = len(sub_neighbours)
-            # print(f"Sub-neighbours: {sub_neighbours}")
+
         ordered_rod = sorted(ruled_out_dict, key=lambda x: ruled_out_dict[x], reverse=True)
         words_order = [assignment[v] for v in ordered_rod]
-        # print(f"Ruled Out Dict: {ruled_out_dict}")
-        # print(f"Ordered_ROD: {ordered_rod}")
-        # print(f"Words Order: {words_order}")
-        #
-        # # iterating through var's words
-        # for word in self.domains[var]:
-        #     eliminated = 0
-        #     for neighbour in neighbours:
-        #         # don't count if neighbor has already assigned value
-        #         if neighbour in assignment:
-        #             continue
-        #         else:
-        #             # calculate overlap between two variables
-        #             xoverlap, yoverlap = self.crossword.overlaps[var, neighbour]
-        #             for neighbour_word in self.domains[neighbour]:
-        #                 # iterate through neighbour's words, check for eliminate ones
-        #                 if word[xoverlap] != neighbour_word[yoverlap]:
-        #                     eliminated += 1
-        #     # add eliminated neighbour's words to temporary dict
-        #     word_dict[word] = eliminated
-        #
-        # # sort variables dictionary by number of eliminated neighbour values
-        # sorted_dict = {k: v for k, v in sorted(word_dict.items(), key=lambda item: item[1])}
-        #
-        # return [*sorted_dict]
+
         return words_order
 
     def select_unassigned_variable(self, assignment):
@@ -240,12 +216,9 @@ class CrosswordCreator():
         return values.
         """
 
-        # choice_dict = {}
         min_var = None
 
-        # iterating through variables in domains
         for variable in self.domains:
-            # iterating through variables in assignment
             if variable not in assignment:
                 if min_var is None:
                     min_var = variable
@@ -253,7 +226,7 @@ class CrosswordCreator():
                 if len(self.domains[variable]) < len(self.domains[min_var]):
                     min_var = variable
 
-        return min_var  # sorted_list[0]
+        return min_var
 
     def backtrack(self, assignment):
         """
@@ -264,25 +237,20 @@ class CrosswordCreator():
 
         If no assignment is possible, return None.
         """
-        # check if assignment is completed
-        if len(assignment) == len(self.domains):
-            return assignment
 
-        # selecting one of unassigned variables
-        variable = self.select_unassigned_variable(assignment)
+        for _ in range(len(self.domains)):
+            min_var = self.select_unassigned_variable(assignment)
+            for word_value in self.domains[min_var]:
+                assignment[min_var] = word_value
+                if self.consistent(assignment):
+                    neighbours = self.crossword.neighbors(min_var)
+                    for neighbour in neighbours:
+                        self.revise(min_var, neighbour)
+                    break
 
-        # iterating through words in that variable
-        for value in self.domains[variable]:
-            # making assignment copy, with updated variable value
-            assignment_copy = assignment.copy()
-            assignment_copy[variable] = value
-            # checking for consistency, getting result of that new assignment backtrack
-            if self.consistent(assignment_copy):
-                result = self.backtrack(assignment_copy)
-                if result is not None:
-                    # self.order_domain_values(variable, assignment_copy)  # my line
-                    return result
-        return None
+        if assignment == {}:
+            return None
+        return assignment
 
 
 def main():
