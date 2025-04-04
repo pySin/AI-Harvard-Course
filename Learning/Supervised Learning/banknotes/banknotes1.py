@@ -37,3 +37,8 @@ model.fit(X_training, y_training)
 
 # Make predictions on the testing set
 predictions = model.predict(X_testing)
+
+# Compute how well we performed
+correct = (y_testing == predictions).sum()
+incorrect = (y_testing != predictions).sum()
+total = len(predictions)
