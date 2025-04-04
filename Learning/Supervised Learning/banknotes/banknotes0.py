@@ -30,3 +30,8 @@ holdout = int(0.40 * len(data))
 random.shuffle(data)
 testing = data[:holdout]
 training = data[holdout:]
+
+# Train model on training set
+X_training = [row["evidence"] for row in training]
+y_training = [row["label"] for row in training]
+model.fit(X_training, y_training)
