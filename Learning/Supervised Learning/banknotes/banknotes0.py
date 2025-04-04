@@ -35,3 +35,10 @@ training = data[holdout:]
 X_training = [row["evidence"] for row in training]
 y_training = [row["label"] for row in training]
 model.fit(X_training, y_training)
+
+# Make predictions on the testing set
+X_testing = [row["evidence"] for row in testing]
+y_testing = [row["label"] for row in testing]
+predictions = model.predict(X_testing)
+
+print(f"Model Predictions: {predictions}")
