@@ -42,3 +42,14 @@ y_testing = [row["label"] for row in testing]
 predictions = model.predict(X_testing)
 
 print(f"Model Predictions: {predictions}")
+
+# Performance
+correct = 0
+incorrect = 0
+total = 0
+for actual, predicted in zip(y_testing, predictions):
+    total += 1
+    if actual == predicted:
+        correct += 1
+    else:
+        incorrect += 1
