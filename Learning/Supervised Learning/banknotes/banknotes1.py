@@ -31,3 +31,6 @@ labels = [row["label"] for row in data]
 X_training, X_testing, y_training, y_testing = train_test_split(
     evidence, labels, test_size=0.4
 )
+
+# Train model
+model.fit(X_training, y_training)
