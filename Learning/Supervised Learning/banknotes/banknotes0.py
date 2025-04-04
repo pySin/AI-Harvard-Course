@@ -7,7 +7,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 
 # model = Perceptron()
-# model = svm.SVC()
+# model = svm.SVC()  # Vector machines
 # model = KNeighborsClassifier(n_neighbors=1)
 model = GaussianNB()
 
@@ -53,3 +53,9 @@ for actual, predicted in zip(y_testing, predictions):
         correct += 1
     else:
         incorrect += 1
+
+# Get test results
+print(f"Results for model {type(model).__name__}")
+print(f"Correct: {correct}")
+print(f"Incorrect: {incorrect}")
+print(f"Accuracy: {100 * correct / total:.2f}%")
