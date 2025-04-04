@@ -42,3 +42,9 @@ predictions = model.predict(X_testing)
 correct = (y_testing == predictions).sum()
 incorrect = (y_testing != predictions).sum()
 total = len(predictions)
+
+# Print results
+print(f"Results for model {type(model).__name__}")
+print(f"Correct: {correct}")
+print(f"Incorrect: {incorrect}")
+print(f"Accuracy: {100 * correct / total:.2f}%")
