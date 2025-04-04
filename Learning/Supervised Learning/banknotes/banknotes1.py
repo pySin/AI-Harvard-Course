@@ -34,3 +34,6 @@ X_training, X_testing, y_training, y_testing = train_test_split(
 
 # Train model
 model.fit(X_training, y_training)
+
+# Make predictions on the testing set
+predictions = model.predict(X_testing)
