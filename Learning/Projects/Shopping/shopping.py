@@ -60,3 +60,21 @@ def train_model(evidence, labels):
     fitted k-nearest neighbor model (k=1) trained on the data.
     """
     raise NotImplementedError
+
+
+def evaluate(labels, predictions):
+    """
+    Given a list of actual labels and a list of predicted labels,
+    return a tuple (sensitivity, specificity).
+
+    Assume each label is either a 1 (positive) or 0 (negative).
+
+    `sensitivity` should be a floating-point value from 0 to 1
+    representing the "true positive rate": the proportion of
+    actual positive labels that were accurately identified.
+
+    `specificity` should be a floating-point value from 0 to 1
+    representing the "true negative rate": the proportion of
+    actual negative labels that were accurately identified.
+    """
+    raise NotImplementedError
