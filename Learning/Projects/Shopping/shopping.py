@@ -52,3 +52,11 @@ def load_data(filename):
     is 1 if Revenue is true, and 0 otherwise.
     """
     raise NotImplementedError
+
+
+def train_model(evidence, labels):
+    """
+    Given a list of evidence lists and a list of labels, return a
+    fitted k-nearest neighbor model (k=1) trained on the data.
+    """
+    raise NotImplementedError
