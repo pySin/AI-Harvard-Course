@@ -23,3 +23,32 @@ def main():
     predictions = model.predict(X_test)
     sensitivity, specificity = evaluate(y_test, predictions)
 
+def load_data(filename):
+    """
+    Load shopping data from a CSV file `filename` and convert into a list of
+    evidence lists and a list of labels. Return a tuple (evidence, labels).
+
+    evidence should be a list of lists, where each list contains the
+    following values, in order:
+        - Administrative, an integer
+        - Administrative_Duration, a floating point number
+        - Informational, an integer
+        - Informational_Duration, a floating point number
+        - ProductRelated, an integer
+        - ProductRelated_Duration, a floating point number
+        - BounceRates, a floating point number
+        - ExitRates, a floating point number
+        - PageValues, a floating point number
+        - SpecialDay, a floating point number
+        - Month, an index from 0 (January) to 11 (December)
+        - OperatingSystems, an integer
+        - Browser, an integer
+        - Region, an integer
+        - TrafficType, an integer
+        - VisitorType, an integer 0 (not returning) or 1 (returning)
+        - Weekend, an integer 0 (if false) or 1 (if true)
+
+    labels should be the corresponding list of labels, where each label
+    is 1 if Revenue is true, and 0 otherwise.
+    """
+    raise NotImplementedError
