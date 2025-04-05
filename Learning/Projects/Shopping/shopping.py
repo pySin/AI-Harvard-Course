@@ -78,3 +78,7 @@ def evaluate(labels, predictions):
     actual negative labels that were accurately identified.
     """
     raise NotImplementedError
+
+
+if __name__ == "__main__":
+    main()
