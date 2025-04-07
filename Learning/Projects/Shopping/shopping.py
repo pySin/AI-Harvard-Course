@@ -17,13 +17,13 @@ def main():
     X_train, X_test, y_train, y_test = train_test_split(
         evidence, labels, test_size=TEST_SIZE
     )
-    o_file = open("test.txt", "w")
-    o_file.write("So far so good")
 
     # Train model and make predictions
     model = train_model(X_train, y_train)
     predictions = model.predict(X_test)
     sensitivity, specificity = evaluate(y_test, predictions)
+    o_file = open("test.txt", "w")
+    o_file.write(f"Sensitivity: {sensitivity} \nSpecificity: {specificity}")
 
 def load_data(filename):
     """
@@ -113,8 +113,7 @@ def train_model(evidence, labels):
     fitted k-nearest neighbor model (k=1) trained on the data.
     """
     model = KNeighborsClassifier(n_neighbors=1)
-    model.fit(evidence, labels)
-    raise NotImplementedError
+    return model.fit(evidence, labels)
 
 
 def evaluate(labels, predictions):
@@ -132,7 +131,26 @@ def evaluate(labels, predictions):
     representing the "true negative rate": the proportion of
     actual negative labels that were accurately identified.
     """
-    raise NotImplementedError
+    # o_file = open("test.txt", "w")
+    # o_file.write(str(labels) + "\n" + str(predictions))
+
+    sensitivity = []
+    specificity = []
+
+    for i in range(len(labels)):
+        if labels[i] == "TRUE":
+            if labels[i] == predictions[i]:
+                sensitivity.append(1)
+            else:
+                sensitivity.append(0)
+        else:
+            if labels[i] == predictions[i]:
+                specificity.append(1)
+            else:
+                specificity.append(0)
+
+
+    return sum(sensitivity) / len(sensitivity), sum(specificity) / len(specificity)
 
 
 if __name__ == "__main__":
