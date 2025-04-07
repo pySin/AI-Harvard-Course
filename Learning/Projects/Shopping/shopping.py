@@ -35,11 +35,11 @@ def load_data(filename):
         - Informational, an integer
         - Informational_Duration, a floating point number
         - ProductRelated, an integer
-        - ProductRelated_Duration, a floating point number
+        - ProductRelated_Duration, a floating point number / 5
         - BounceRates, a floating point number
         - ExitRates, a floating point number
         - PageValues, a floating point number
-        - SpecialDay, a floating point number
+        - SpecialDay, a floating point number / 9
         - Month, an index from 0 (January) to 11 (December)
         - OperatingSystems, an integer
         - Browser, an integer
@@ -52,17 +52,55 @@ def load_data(filename):
     is 1 if Revenue is true, and 0 otherwise.
     """
 
+    month_indexes = {
+        "Jan": 0,
+        "Feb": 1,
+        "Mar": 2,
+        "Apr": 3,
+        "May": 4,
+        "June": 5,
+        "Jul": 6,
+        "Aug": 7,
+        "Sep": 8,
+        "Oct": 9,
+        "Nov": 10,
+        "Dec": 11
+    }
+
+    evidence = []
+    labels = []
+
     with open(filename) as f:
         read_data = csv.reader(f)
         next(read_data)
         o_file = open("test.txt", "w")
         t_text = next(read_data)
 
-        evidence = [
-            int(t_text[0]),
-            float(t_text[1])
-        ]
-        o_file.write(str(t_text) + "\n" + str(evidence))
+        for visit_data in read_data:
+            evidence_row = [
+                int(visit_data[0]),
+                float(visit_data[1]),
+                int(visit_data[2]),
+                float(visit_data[3]),
+                int(visit_data[4]),
+                float(visit_data[5]),
+                float(visit_data[6]),
+                float(visit_data[7]),
+                float(visit_data[8]),
+                float(visit_data[9]),
+                month_indexes[visit_data[10]],
+                int(visit_data[11]),
+                int(visit_data[12]),
+                int(visit_data[13]),
+                int(visit_data[14]),
+                1 if visit_data[15] == "Returning_Visitor" else 0,
+                0 if visit_data[16] == "FALSE" else 1
+            ]
+
+            evidence.append(evidence_row)
+            labels.append(visit_data[-1])
+
+        o_file.write(str(t_text) + "\n" + str(evidence) + "\n" + str(labels))
 
     raise NotImplementedError()
 
