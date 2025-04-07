@@ -17,6 +17,8 @@ def main():
     X_train, X_test, y_train, y_test = train_test_split(
         evidence, labels, test_size=TEST_SIZE
     )
+    o_file = open("test.txt", "w")
+    o_file.write("So far so good")
 
     # Train model and make predictions
     model = train_model(X_train, y_train)
@@ -99,7 +101,6 @@ def load_data(filename):
 
             evidence.append(evidence_row)
             labels.append(visit_data[-1])
-
 
         # o_file.write(str(len(evidence)) + "\n" + str(len(labels)) + str(t_text) + "\n" + str(evidence) + "\n" + str(labels))
 
