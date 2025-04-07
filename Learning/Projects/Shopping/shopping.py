@@ -100,9 +100,10 @@ def load_data(filename):
             evidence.append(evidence_row)
             labels.append(visit_data[-1])
 
-        o_file.write(str(t_text) + "\n" + str(evidence) + "\n" + str(labels))
 
-    raise NotImplementedError()
+        # o_file.write(str(len(evidence)) + "\n" + str(len(labels)) + str(t_text) + "\n" + str(evidence) + "\n" + str(labels))
+
+    return evidence, labels
 
 
 def train_model(evidence, labels):
