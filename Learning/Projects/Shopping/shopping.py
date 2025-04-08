@@ -22,8 +22,8 @@ def main():
     model = train_model(X_train, y_train)
     predictions = model.predict(X_test)
     sensitivity, specificity = evaluate(y_test, predictions)
-    o_file = open("test.txt", "w")
-    o_file.write(f"Sensitivity: {sensitivity} \nSpecificity: {specificity}")
+    # o_file = open("test.txt", "w")
+    # o_file.write(f"Sensitivity: {sensitivity} \nSpecificity: {specificity}")
 
 def load_data(filename):
     """
@@ -101,8 +101,6 @@ def load_data(filename):
 
             evidence.append(evidence_row)
             labels.append(visit_data[-1])
-
-        # o_file.write(str(len(evidence)) + "\n" + str(len(labels)) + str(t_text) + "\n" + str(evidence) + "\n" + str(labels))
 
     return evidence, labels
 
