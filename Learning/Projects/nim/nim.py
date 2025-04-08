@@ -93,3 +93,10 @@ class NimAI():
         old = self.get_q_value(old_state, action)
         best_future = self.best_future_reward(new_state)
         self.update_q_value(old_state, action, old, reward, best_future)
+
+    def get_q_value(self, state, action):
+        """
+        Return the Q-value for the state `state` and the action `action`.
+        If no Q-value exists yet in `self.q`, return 0.
+        """
+        raise NotImplementedError
