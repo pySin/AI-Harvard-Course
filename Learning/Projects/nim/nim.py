@@ -117,3 +117,15 @@ class NimAI():
         is the sum of the current reward and estimated future rewards.
         """
         raise NotImplementedError
+
+    def best_future_reward(self, state):
+        """
+        Given a state `state`, consider all possible `(state, action)`
+        pairs available in that state and return the maximum of all
+        of their Q-values.
+
+        Use 0 as the Q-value if a `(state, action)` pair has no
+        Q-value in `self.q`. If there are no available actions in
+        `state`, return 0.
+        """
+        raise NotImplementedError
