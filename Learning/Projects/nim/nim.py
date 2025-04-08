@@ -44,3 +44,26 @@ class Nim():
         Switch the current player to the other player.
         """
         self.player = Nim.other_player(self.player)
+
+    def move(self, action):
+        """
+        Make the move `action` for the current player.
+        `action` must be a tuple `(i, j)`.
+        """
+        pile, count = action
+
+        # Check for errors
+        if self.winner is not None:
+            raise Exception("Game already won")
+        elif pile < 0 or pile >= len(self.piles):
+            raise Exception("Invalid pile")
+        elif count < 1 or count > self.piles[pile]:
+            raise Exception("Invalid number of objects")
+
+        # Update pile
+        self.piles[pile] -= count
+        self.switch_player()
+
+        # Check for a winner
+        if all(pile == 0 for pile in self.piles):
+            self.winner = self.player
