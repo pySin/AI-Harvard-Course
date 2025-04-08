@@ -38,3 +38,9 @@ class Nim():
         `player`. Assumes `player` is either 0 or 1.
         """
         return 0 if player == 1 else 1
+
+    def switch_player(self):
+        """
+        Switch the current player to the other player.
+        """
+        self.player = Nim.other_player(self.player)
