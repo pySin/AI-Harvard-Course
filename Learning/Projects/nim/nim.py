@@ -129,3 +129,20 @@ class NimAI():
         `state`, return 0.
         """
         raise NotImplementedError
+
+    def choose_action(self, state, epsilon=True):
+        """
+        Given a state `state`, return an action `(i, j)` to take.
+
+        If `epsilon` is `False`, then return the best action
+        available in the state (the one with the highest Q-value,
+        using 0 for pairs that have no Q-values).
+
+        If `epsilon` is `True`, then with probability
+        `self.epsilon` choose a random available action,
+        otherwise choose the best action available.
+
+        If multiple actions have the same Q-value, any of those
+        options is an acceptable return value.
+        """
+        raise NotImplementedError
