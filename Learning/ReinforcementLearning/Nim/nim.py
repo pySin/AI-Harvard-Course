@@ -148,6 +148,17 @@ class NimAI():
         If multiple actions have the same Q-value, any of those
         options is an acceptable return value.
         """
+
+        available_actions = Nim.available_actions(state)
+        print(f"Current State: {state}")
+        print(f"Available Actions: {available_actions}")
+
+        random_num = random.random()
+        print(f"Random Number: {random_num}")
+
+        if random_num <= self.epsilon:
+            pass
+
         raise NotImplementedError
 
 
