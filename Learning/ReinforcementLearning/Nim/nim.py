@@ -153,11 +153,10 @@ class NimAI():
         print(f"Current State: {state}")
         print(f"Available Actions: {available_actions}")
 
-        random_num = random.random()
-        print(f"Random Number: {random_num}")
-
-        if random_num <= self.epsilon:
-            pass
+        if epsilon:
+            random_num = random.random()
+            if random_num <= self.epsilon:
+                pass
 
         raise NotImplementedError
 
