@@ -156,7 +156,9 @@ class NimAI():
         if epsilon:
             random_num = random.random()
             if random_num <= self.epsilon:
-                pass
+                action = random.choice(list(available_actions))
+            else:
+                pass  # Get only the high value pairs
 
         raise NotImplementedError
 
