@@ -100,9 +100,7 @@ class NimAI():
         If no Q-value exists yet in `self.q`, return 0.
         """
 
-        print(f"State: {state}, Action: {action}")
-
-        if (state, action) not in self.q.keys():
+        if (tuple(state), action) not in self.q.keys():
             return 0
         else:
             return self.q[(state, action)]
@@ -134,6 +132,9 @@ class NimAI():
         Q-value in `self.q`. If there are no available actions in
         `state`, return 0.
         """
+
+        available_actions = Nim.available_actions(state)
+
         raise NotImplementedError
 
     def choose_action(self, state, epsilon=True):
@@ -153,8 +154,6 @@ class NimAI():
         """
 
         available_actions = Nim.available_actions(state)
-        print(f"Current State: {state}")
-        print(f"Available Actions: {available_actions}")
 
         if epsilon:
             random_num = random.random()
