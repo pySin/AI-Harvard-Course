@@ -99,7 +99,10 @@ class NimAI():
         Return the Q-value for the state `state` and the action `action`.
         If no Q-value exists yet in `self.q`, return 0.
         """
-        if (state, action) not in self.q:
+
+        print(f"State: {state}, Action: {action}")
+
+        if (state, action) not in self.q.keys():
             return 0
         else:
             return self.q[(state, action)]
@@ -158,9 +161,11 @@ class NimAI():
             if random_num <= self.epsilon:
                 action = random.choice(list(available_actions))
             else:
-                action = sorted(available_actions, key=lambda x: x[0], reverse=True)
+                action = sorted(available_actions, key=lambda x: x[0], reverse=True)[0]
+        else:
+            action = sorted(available_actions, key=lambda x: x[0], reverse=True)[0]
 
-        raise NotImplementedError
+        return action
 
 
 def train(n):
