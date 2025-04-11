@@ -145,8 +145,9 @@ class NimAI():
         for pair in state_actions:
             if pair in self.q.keys():
                 reward = self.q[pair] if self.q[pair] > reward else reward
-
-        raise NotImplementedError
+            else:
+                reward = 0 if reward < 1 else reward
+        return reward
 
     def choose_action(self, state, epsilon=True):
         """
