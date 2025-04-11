@@ -103,7 +103,7 @@ class NimAI():
         if (tuple(state), action) not in self.q.keys():
             return 0
         else:
-            return self.q[(state, action)]
+            return self.q[(tuple(state), action)]
 
     def update_q_value(self, state, action, old_q, reward, future_rewards):
         """
@@ -120,7 +120,11 @@ class NimAI():
         `alpha` is the learning rate, and `new value estimate`
         is the sum of the current reward and estimated future rewards.
         """
-        raise NotImplementedError
+
+        future_reword = old_q + self.alpha * ((reward + future_rewards) - old_q)
+        new_reword = future_reword if future_reword > old_q else old_q
+        self.q[(tuple(state), action)] = new_reword
+        # raise NotImplementedError
 
     def best_future_reward(self, state):
         """
@@ -135,8 +139,8 @@ class NimAI():
 
         available_actions = Nim.available_actions(state)
         state_actions = [(tuple(state), action) for action in available_actions]
-        print(f"State_Actions: {state_actions}")
-        print(f"Q-actions: {self.q}")
+        # print(f"State_Actions: {state_actions}")
+        # print(f"Q-actions: {self.q}")
 
         if not self.q:
             return 0
