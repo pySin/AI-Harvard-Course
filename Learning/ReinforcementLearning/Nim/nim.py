@@ -136,6 +136,15 @@ class NimAI():
         available_actions = Nim.available_actions(state)
         state_actions = [(tuple(state), action) for action in available_actions]
         print(f"State_Actions: {state_actions}")
+        print(f"Q-actions: {self.q}")
+
+        if not self.q:
+            return 0
+
+        reward = -1
+        for pair in state_actions:
+            if pair in self.q.keys():
+                reward = self.q[pair] if self.q[pair] > reward else reward
 
         raise NotImplementedError
 
