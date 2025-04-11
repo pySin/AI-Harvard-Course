@@ -134,6 +134,8 @@ class NimAI():
         """
 
         available_actions = Nim.available_actions(state)
+        state_actions = [(tuple(state), action) for action in available_actions]
+        print(f"State_Actions: {state_actions}")
 
         raise NotImplementedError
 
