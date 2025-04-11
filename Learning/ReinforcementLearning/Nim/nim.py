@@ -146,7 +146,7 @@ class NimAI():
             if pair in self.q.keys():
                 reward = self.q[pair] if self.q[pair] > reward else reward
             else:
-                reward = 0 if reward < 1 else reward
+                reward = 0 if reward < 0 else reward
         return reward
 
     def choose_action(self, state, epsilon=True):
