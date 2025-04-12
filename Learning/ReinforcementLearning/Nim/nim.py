@@ -133,11 +133,11 @@ class NimAI():
         future_reword = old_q + self.alpha * ((reward + future_rewards) - old_q)
         new_reword = future_reword if future_reword > old_q else old_q
         # print(f"Future RewardS: {future_rewards}")
-        # print(f"Future reword: {future_reword}")
+        print(f"Future reword: {future_reword}")
         # print(f"Old reword: {old_q}")
         # print(f"Reword: {reward}")
 
-        self.q[(tuple(state), action)] = new_reword
+        self.q[(tuple(state), action)] = future_reword
         # raise NotImplementedError
 
     def best_future_reward(self, state):
@@ -159,15 +159,17 @@ class NimAI():
         if not self.q:
             return 0
 
-        reward = -1
+        print("Workflow check!")
+        print(f"State Actions: {state_actions}")
+        reward = 0
         for pair in state_actions:
             if pair in self.q.keys():
                 # print(f"Pair: {pair}")
                 # print(f"Pair Values: {self.q[pair]}")
                 print(f"Current pair reword: {self.q[pair]}")
                 reward = self.q[pair] if self.q[pair] > reward else reward
-            else:
-                reward = 0  # if reward < 0 else reward
+            # else:
+            #     reward = 0  # if reward < 0 else reward
         return reward
 
     def choose_action(self, state, epsilon=True):
