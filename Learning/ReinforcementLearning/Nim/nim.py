@@ -93,15 +93,15 @@ class NimAI():
         old = self.get_q_value(old_state, action)
         best_future = self.best_future_reward(new_state)
 
-        print(f"Old State: {old_state}")
-        print(f"Action: {action}")
-        print(f"Old: {old}")
-        print(f"Reword: {reward}")
-        print(f"Best Future: {best_future}")
+        # print(f"Old State: {old_state}")
+        # print(f"Action: {action}")
+        # print(f"Old: {old}")
+        # print(f"Reword: {reward}")
+        # print(f"Best Future: {best_future}")
 
         self.update_q_value(old_state, action, old, reward, best_future)
 
-        print(f"States and Moves: {self.q}")
+        # print(f"States and Moves: {self.q}")
 
     def get_q_value(self, state, action):
         """
@@ -133,7 +133,7 @@ class NimAI():
         future_reword = old_q + self.alpha * ((reward + future_rewards) - old_q)
         new_reword = future_reword if future_reword > old_q else old_q
         # print(f"Future RewardS: {future_rewards}")
-        print(f"Future reword: {future_reword}")
+        # print(f"Future reword: {future_reword}")
         # print(f"Old reword: {old_q}")
         # print(f"Reword: {reward}")
 
@@ -159,14 +159,14 @@ class NimAI():
         if not self.q:
             return 0
 
-        print("Workflow check!")
-        print(f"State Actions: {state_actions}")
+        # print("Workflow check!")
+        # print(f"State Actions: {state_actions}")
         reward = 0
         for pair in state_actions:
             if pair in self.q.keys():
                 # print(f"Pair: {pair}")
                 # print(f"Pair Values: {self.q[pair]}")
-                print(f"Current pair reword: {self.q[pair]}")
+                # print(f"Current pair reword: {self.q[pair]}")
                 reward = self.q[pair] if self.q[pair] > reward else reward
             # else:
             #     reward = 0  # if reward < 0 else reward
@@ -211,8 +211,8 @@ def train(n):
 
     # Play n games
     for i in range(n):
-        if i > 100:  # Remove
-            time.sleep(6)  # Remove
+        # if i > 100:  # Remove
+        #     time.sleep(6)  # Remove
 
         print(f"Playing training game {i + 1}")
         game = Nim()
@@ -238,7 +238,7 @@ def train(n):
             game.move(action)
             new_state = game.piles.copy()
 
-            print(f"Devider--------------------------------\n")
+            # print(f"Devider--------------------------------\n")
 
             # When game is over, update Q values with rewards
             if game.winner is not None:
