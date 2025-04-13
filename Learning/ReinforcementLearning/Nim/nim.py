@@ -192,16 +192,11 @@ class NimAI():
         available_actions = Nim.available_actions(state)
         print(f"Available actions: {available_actions}")
 
-        if epsilon:
-            random_num = random.random()
-            if random_num <= self.epsilon:
-                action = random.choice(list(available_actions))
-            else:
-                action = sorted(available_actions, key=lambda x: x[0], reverse=True)[0]
-        else:
-            action = sorted(available_actions, key=lambda x: x[0], reverse=True)[0]
+        max_action = -1
+        for action in available_actions:
+            max_action = action if self.q[(tuple(state), action)]
 
-        return action
+        return max_action
 
 
 def train(n):
