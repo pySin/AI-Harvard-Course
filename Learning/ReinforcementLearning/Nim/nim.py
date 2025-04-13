@@ -192,9 +192,11 @@ class NimAI():
         available_actions = Nim.available_actions(state)
         print(f"Available actions: {available_actions}")
 
-        max_action = -1
+        max_action = available_actions.pop()
         for action in available_actions:
-            max_action = action if self.q[(tuple(state), action)]
+            if (tuple(state), action) in self.q.keys():
+                max_action = action if (self.q[(tuple(state), action)] >
+                                        self.q[(tuple(state), max_action)]) else max_action
 
         return max_action
 
