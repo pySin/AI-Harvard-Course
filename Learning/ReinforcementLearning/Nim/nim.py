@@ -109,7 +109,7 @@ class NimAI():
         If no Q-value exists yet in `self.q`, return 0.
         """
 
-        if (tuple(state), action) not in self.q.keys():
+        if (tuple(state), action) not in list(self.q.keys()):
             return 0
         else:
             return self.q[(tuple(state), action)]
@@ -131,7 +131,7 @@ class NimAI():
         """
 
         future_reword = old_q + self.alpha * ((reward + future_rewards) - old_q)
-        # new_reword = future_reword if future_reword > old_q else old_q
+        new_reword = future_reword if future_reword > old_q else old_q
         # print(f"Future RewardS: {future_rewards}")
         # print(f"Future reword: {future_reword}")
         # print(f"Old reword: {old_q}")
@@ -165,12 +165,17 @@ class NimAI():
 
         pair_rewords = []
         for pair in state_actions:
-            if pair in self.q.keys():
+            # print(f"In pair Pair: {pair}")
+            # print(f"q.keys: {list(self.q.keys())}")
+
+            if pair in list(self.q.keys()):
+                print("In Statement")
                 pair_rewords.append(self.q[pair])
             else:
                 pair_rewords.append(0)
 
         reward = max(pair_rewords)
+        # print(f"Max reword: {reward}")
         return reward
 
     def choose_action(self, state, epsilon=True):
@@ -194,9 +199,17 @@ class NimAI():
 
         max_action = available_actions.pop()
         for action in available_actions:
-            if (tuple(state), action) in self.q.keys():
+            print(f"Q pairs keys: {self.q}")
+            print(f"Current Key: {(tuple(state), action)}")
+            if (tuple(state), action) in self.q:
                 max_action = action if (self.q[(tuple(state), action)] >
                                         self.q[(tuple(state), max_action)]) else max_action
+                print(f"Max Action: {max_action}")
+
+
+        state_actions = [[s, self.q[s]] for s in self.q]
+        # print(f"Self Actions: {state_actions}")
+        print(f"Final Max Action: {max_action}")
 
         return max_action
 
