@@ -42,4 +42,3 @@ model.fit(X_training, y_training, epochs=20)
 
 # Evaluate how well model performs
 model.evaluate(X_testing, y_testing, verbose=2)
-
